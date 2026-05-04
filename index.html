@@ -1,1799 +1,1456 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="html-root">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>واعي | Waie - الهوية الصحية الذكية</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #00c896;
-            --primary-dark: #00a87e;
-            --primary-light: #e6fff7;
-            --secondary: #0ea5e9;
-            --danger: #ef4444;
-            --danger-light: #fef2f2;
-            --warning: #f59e0b;
-            --warning-light: #fffbeb;
-            --safe: #10b981;
-            --safe-light: #ecfdf5;
-            --dark: #0f172a;
-            --dark2: #1e293b;
-            --gray: #64748b;
-            --light: #f8fafc;
-            --border: #e2e8f0;
-            --white: #ffffff;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
-            --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
-            --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
-            --radius-sm: 10px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --radius-xl: 32px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#00c896">
+<title>واعي | Waie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ===== RESET & ROOT ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 
-        * { margin:0; padding:0; box-sizing:border-box; }
+:root{
+  --primary:#00c896;
+  --primary-dark:#009e78;
+  --primary-light:#e6fff7;
+  --primary-mid:rgba(0,200,150,0.15);
+  --secondary:#0ea5e9;
+  --danger:#ef4444;
+  --danger-light:#fef2f2;
+  --danger-mid:rgba(239,68,68,0.12);
+  --warning:#f59e0b;
+  --warning-light:#fffbeb;
+  --safe:#10b981;
+  --safe-light:#ecfdf5;
+  --dark:#0f172a;
+  --dark2:#1e293b;
+  --dark3:#334155;
+  --gray:#64748b;
+  --gray2:#94a3b8;
+  --light:#f1f5f9;
+  --light2:#f8fafc;
+  --border:#e2e8f0;
+  --border2:#cbd5e1;
+  --white:#ffffff;
+  --shadow-xs:0 1px 2px rgba(0,0,0,0.06);
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md:0 4px 20px rgba(0,0,0,0.10);
+  --shadow-lg:0 8px 40px rgba(0,0,0,0.12);
+  --shadow-xl:0 20px 60px rgba(0,0,0,0.16);
+  --shadow-green:0 6px 24px rgba(0,200,150,0.30);
+  --r-xs:8px;
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:20px;
+  --r-xl:28px;
+  --r-2xl:40px;
+  --nav-h:64px;
+  --bar-h:68px;
+  --font-ar:'Cairo',sans-serif;
+  --font-en:'Poppins',sans-serif;
+}
 
-        html { scroll-behavior: smooth; }
+body{
+  font-family:var(--font-ar);
+  background:var(--light);
+  color:var(--dark);
+  min-height:100vh;
+  min-height:100dvh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.en{font-family:var(--font-en);direction:ltr;}
 
-        body {
-            font-family: 'Cairo', 'Tajawal', sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            min-height: 100vh;
-            transition: background 0.3s;
-        }
-        body.en { font-family: 'Poppins', sans-serif; direction: ltr; }
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--light);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px;}
 
-        /* =========== NAVBAR =========== */
-        .navbar {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .navbar-inner {
-            max-width: 960px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 20px;
-            gap: 12px;
-        }
-        .nav-logo {
-            display: flex; align-items: center; gap: 10px; text-decoration: none;
-        }
-        .nav-logo-icon {
-            width: 44px; height: 44px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius-sm);
-            display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0,200,150,0.3);
-        }
-        .nav-logo-text { font-size: 22px; font-weight: 900; color: var(--primary); }
-        .nav-logo-sub { font-size: 10px; color: var(--gray); font-weight: 400; }
+/* ===== NAVBAR ===== */
+.navbar{
+  position:sticky;top:0;z-index:500;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  height:var(--nav-h);
+}
+.navbar-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;height:100%;gap:12px;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;flex-shrink:0;
+}
+.nav-brand-icon{
+  width:40px;height:40px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:18px;
+  box-shadow:var(--shadow-green);
+}
+.nav-brand-text{font-size:20px;font-weight:900;color:var(--primary);line-height:1;}
+.nav-brand-sub{font-size:10px;color:var(--gray2);margin-top:1px;}
 
-        .nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-desktop{display:flex;align-items:center;gap:4px;}
+.nav-link{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:var(--r-sm);
+  border:none;background:transparent;
+  font-family:inherit;font-size:13px;font-weight:700;
+  color:var(--gray);cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.nav-link:hover{background:var(--light);color:var(--dark2);}
+.nav-link.active{background:var(--primary-light);color:var(--primary);}
+.nav-link i{font-size:13px;}
 
-        .btn-lang {
-            padding: 8px 16px; border-radius: 40px;
-            border: 1.5px solid var(--primary);
-            color: var(--primary); font-weight: 700; font-size: 13px;
-            background: transparent; cursor: pointer; transition: all 0.2s;
-        }
-        .btn-lang:hover { background: var(--primary); color: white; }
+.btn-lang{
+  padding:8px 16px;border-radius:var(--r-2xl);
+  border:1.5px solid var(--primary);
+  color:var(--primary);font-weight:700;font-size:12px;
+  background:transparent;cursor:pointer;
+  transition:all .2s;font-family:inherit;white-space:nowrap;flex-shrink:0;
+}
+.btn-lang:hover{background:var(--primary);color:#fff;}
 
-        .btn-menu {
-            display: none; width: 42px; height: 42px;
-            background: var(--light); border: 1px solid var(--border);
-            border-radius: var(--radius-sm); align-items: center; justify-content: center;
-            cursor: pointer; font-size: 18px; color: var(--dark2);
-        }
+.btn-hamburger{
+  display:none;
+  width:40px;height:40px;border-radius:var(--r-sm);
+  border:1px solid var(--border);background:var(--light2);
+  align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:var(--dark2);flex-shrink:0;
+}
 
-        @media (max-width: 640px) {
-            .btn-menu { display: flex; }
-        }
+/* ===== MOBILE MENU ===== */
+.drawer-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(15,23,42,0.5);
+  z-index:900;backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+.drawer-overlay.open{display:block;}
 
-        /* =========== SIDE MENU (MOBILE) =========== */
-        .side-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.4); z-index: 2000; backdrop-filter: blur(4px);
-        }
-        .side-overlay.open { display: block; }
+.drawer{
+  position:fixed;top:0;bottom:0;
+  width:min(280px,85vw);
+  background:var(--white);z-index:901;
+  display:flex;flex-direction:column;
+  box-shadow:var(--shadow-xl);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+[dir="rtl"] .drawer{right:0;transform:translateX(100%);}
+[dir="ltr"] .drawer{left:0;transform:translateX(-100%);}
+.drawer.open{transform:translateX(0)!important;}
 
-        .side-menu {
-            position: fixed; top: 0; right: -300px; bottom: 0;
-            width: 280px; background: var(--white); z-index: 2001;
-            padding: 24px 20px; transition: right 0.3s cubic-bezier(.4,0,.2,1);
-            box-shadow: var(--shadow-xl);
-            display: flex; flex-direction: column; gap: 8px;
-        }
-        .side-menu.open { right: 0; }
-        body.en .side-menu { right: auto; left: -300px; }
-        body.en .side-menu.open { left: 0; right: auto; }
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 18px 16px;
+  border-bottom:1px solid var(--border);
+}
+.drawer-close{
+  width:34px;height:34px;border-radius:var(--r-xs);
+  border:1px solid var(--border);background:var(--light);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--gray);font-size:14px;flex-shrink:0;
+}
+.drawer-nav{flex:1;overflow-y:auto;padding:12px 12px;}
+.drawer-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-radius:var(--r-sm);
+  border:none;background:transparent;width:100%;
+  font-family:inherit;font-size:14px;font-weight:700;
+  color:var(--dark3);cursor:pointer;transition:all .2s;
+  margin-bottom:4px;
+}
+[dir="rtl"] .drawer-item{text-align:right;}
+[dir="ltr"] .drawer-item{text-align:left;}
+.drawer-item:hover{background:var(--light);color:var(--dark);}
+.drawer-item.active{background:var(--primary-light);color:var(--primary);}
+.drawer-item i{font-size:15px;width:20px;text-align:center;flex-shrink:0;}
+.drawer-foot{padding:12px 12px 24px;}
+.drawer-lang{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 14px;border-radius:var(--r-sm);
+  border:1.5px solid var(--primary);
+  background:var(--primary-light);color:var(--primary);
+  font-family:inherit;font-size:14px;font-weight:700;
+  cursor:pointer;width:100%;justify-content:center;transition:all .2s;
+}
+.drawer-lang:hover{background:var(--primary);color:#fff;}
 
-        .side-menu-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
-        }
-        .side-menu-close {
-            width: 36px; height: 36px; background: var(--light);
-            border-radius: 8px; display: flex; align-items: center;
-            justify-content: center; cursor: pointer; border: none;
-            color: var(--gray); font-size: 16px;
-        }
-        .menu-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 16px; border-radius: var(--radius-sm);
-            cursor: pointer; transition: all 0.2s; border: none;
-            background: transparent; width: 100%; text-align: right;
-            font-family: inherit; font-size: 15px; font-weight: 600; color: var(--dark2);
-        }
-        body.en .menu-item { text-align: left; }
-        .menu-item:hover { background: var(--primary-light); color: var(--primary); }
-        .menu-item.active { background: var(--primary-light); color: var(--primary); }
-        .menu-item i { width: 20px; text-align: center; font-size: 16px; }
+/* ===== MAIN LAYOUT ===== */
+main{
+  max-width:720px;margin:0 auto;
+  padding:24px 16px calc(var(--bar-h) + 24px);
+}
+section{display:none;}
+section.active{display:block;}
 
-        /* =========== MAIN =========== */
-        main { max-width: 680px; margin: 0 auto; padding: 24px 16px 120px; }
+/* Desktop: wider main when no bottom bar */
+@media(min-width:768px){
+  main{padding-bottom:32px;}
+}
 
-        section { display: none; }
-        section.active { display: block; }
+/* ===== CARD ===== */
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  padding:20px;
+  box-shadow:var(--shadow-xs);
+  margin-bottom:14px;
+}
+.card-head{
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.card-head-icon{
+  width:42px;height:42px;flex-shrink:0;
+  background:var(--primary-light);border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--primary);font-size:18px;
+}
+.card-head h3{font-size:17px;font-weight:800;color:var(--dark);}
+.card-head p{font-size:11px;color:var(--gray);margin-top:2px;}
 
-        /* =========== WELCOME =========== */
-        .welcome-hero {
-            text-align: center; padding: 40px 0 20px;
-        }
-        .hero-icon-wrap {
-            position: relative; display: inline-block; margin-bottom: 28px;
-        }
-        .hero-icon-ring {
-            width: 120px; height: 120px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-light), #e0f2fe);
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto;
-            animation: float 3s ease-in-out infinite;
-        }
-        .hero-icon-ring i { font-size: 52px; color: var(--primary); }
-        .hero-badge {
-            position: absolute; top: -4px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white; font-size: 10px; font-weight: 700;
-            padding: 4px 10px; border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(0,200,150,0.4);
-        }
-        body.en .hero-badge { left: -8px; right: auto; }
-        body:not(.en) .hero-badge { right: -8px; }
+/* ===== WELCOME ===== */
+.hero{text-align:center;padding:32px 0 20px;}
+.hero-icon-wrap{
+  position:relative;display:inline-block;margin-bottom:24px;
+}
+.hero-ring{
+  width:110px;height:110px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary-light),#dbeafe);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto;
+  animation:float 3s ease-in-out infinite;
+  box-shadow:0 0 0 12px rgba(0,200,150,0.06),0 0 0 24px rgba(0,200,150,0.03);
+}
+.hero-ring i{font-size:46px;color:var(--primary);}
+.hero-badge{
+  position:absolute;top:-6px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;font-size:10px;font-weight:800;
+  padding:4px 10px;border-radius:20px;
+  box-shadow:var(--shadow-green);
+  white-space:nowrap;
+}
+[dir="rtl"] .hero-badge{right:-8px;}
+[dir="ltr"] .hero-badge{left:-8px;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+.hero-title{font-size:clamp(22px,5vw,32px);font-weight:900;color:var(--dark);margin-bottom:10px;line-height:1.3;}
+.hero-desc{color:var(--gray);font-size:clamp(13px,3vw,15px);line-height:1.85;max-width:380px;margin:0 auto 28px;}
 
-        .welcome-title {
-            font-size: 32px; font-weight: 900; color: var(--dark);
-            margin-bottom: 12px; line-height: 1.3;
-        }
-        .welcome-desc {
-            color: var(--gray); font-size: 15px; line-height: 1.8;
-            max-width: 400px; margin: 0 auto 32px;
-        }
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.stat-box{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:14px 8px;text-align:center;
+}
+.stat-num{font-size:clamp(20px,4vw,26px);font-weight:900;color:var(--primary);line-height:1;}
+.stat-lbl{font-size:10px;color:var(--gray);margin-top:4px;font-weight:600;}
 
-        /* Feature Cards */
-        .feature-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 12px; margin-bottom: 32px;
-        }
-        @media (max-width: 480px) { .feature-grid { grid-template-columns: repeat(3,1fr); gap: 8px; } }
-        .feature-card {
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--radius-md); padding: 16px 12px;
-            text-align: center; transition: all 0.2s;
-        }
-        .feature-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); }
-        .feature-card i { font-size: 24px; color: var(--primary); margin-bottom: 8px; display: block; }
-        .feature-card p { font-size: 12px; font-weight: 600; color: var(--dark2); }
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
+.feat-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:16px 10px;text-align:center;
+  transition:all .2s;cursor:default;
+}
+.feat-card:hover{border-color:var(--primary);box-shadow:var(--shadow-sm);}
+.feat-card i{font-size:22px;color:var(--primary);margin-bottom:8px;display:block;}
+.feat-card p{font-size:11px;font-weight:700;color:var(--dark3);}
 
-        /* Stats Row */
-        .stats-row {
-            display: flex; gap: 12px; margin-bottom: 28px;
-        }
-        .stat-box {
-            flex: 1; background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--radius-md); padding: 14px; text-align: center;
-        }
-        .stat-num { font-size: 24px; font-weight: 900; color: var(--primary); }
-        .stat-label { font-size: 11px; color: var(--gray); margin-top: 2px; }
+/* ===== BUTTONS ===== */
+.btn-primary{
+  width:100%;padding:15px 20px;
+  border:none;border-radius:var(--r-lg);
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-size:15px;font-weight:800;
+  cursor:pointer;font-family:inherit;
+  box-shadow:var(--shadow-green);
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  transition:all .25s;-webkit-tap-highlight-color:transparent;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,200,150,0.42);}
+.btn-primary:active{transform:translateY(0);opacity:.9;}
+.btn-secondary{
+  width:100%;padding:14px 20px;
+  border:1.5px solid var(--border);border-radius:var(--r-lg);
+  background:var(--white);color:var(--dark3);
+  font-size:14px;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary);}
 
-        /* =========== BTN PRIMARY =========== */
-        .btn-primary {
-            width: 100%; padding: 16px; border: none; border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white; font-size: 16px; font-weight: 800;
-            cursor: pointer; transition: all 0.25s; font-family: inherit;
-            box-shadow: 0 6px 24px rgba(0,200,150,0.35);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,200,150,0.45); }
-        .btn-primary:active { transform: translateY(0); }
+/* ===== FORM ===== */
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:800;color:var(--dark3);margin-bottom:5px;letter-spacing:.2px;}
+.form-label span{font-weight:400;color:var(--gray2);}
+.form-control{
+  width:100%;padding:12px 14px;
+  background:var(--light);border:1.5px solid var(--border);
+  border-radius:var(--r-sm);font-size:14px;font-family:inherit;
+  color:var(--dark);outline:none;transition:all .2s;
+  -webkit-appearance:none;
+}
+.form-control:focus{border-color:var(--primary);background:var(--white);box-shadow:0 0 0 3px var(--primary-mid);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 
-        .btn-secondary {
-            width: 100%; padding: 14px; border: 2px solid var(--border);
-            border-radius: var(--radius-md); background: var(--white);
-            color: var(--dark2); font-size: 15px; font-weight: 700;
-            cursor: pointer; transition: all 0.2s; font-family: inherit;
-        }
-        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+.chips{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{
+  padding:8px 13px;border:1.5px solid var(--border);
+  border-radius:var(--r-2xl);font-size:12px;font-weight:700;
+  font-family:inherit;cursor:pointer;transition:all .2s;
+  background:var(--white);color:var(--dark3);
+  display:flex;align-items:center;gap:6px;
+  -webkit-tap-highlight-color:transparent;
+}
+.chip:hover{border-color:var(--primary);color:var(--primary);}
+.chip.sel{background:var(--primary);border-color:var(--primary);color:#fff;}
+.chip i{font-size:11px;}
 
-        /* =========== CARD =========== */
-        .card {
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 24px;
-            box-shadow: var(--shadow-sm); margin-bottom: 16px;
-        }
-        .card-header {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-        }
-        .card-header-icon {
-            width: 44px; height: 44px; background: var(--primary-light);
-            border-radius: var(--radius-sm); display: flex; align-items: center;
-            justify-content: center; color: var(--primary); font-size: 20px;
-        }
-        .card-header h3 { font-size: 18px; font-weight: 800; color: var(--dark); }
-        .card-header p { font-size: 12px; color: var(--gray); }
+/* ===== SCANNER ===== */
+.scanner-box{
+  background:linear-gradient(160deg,#0f172a,#1e293b);
+  border-radius:var(--r-lg);overflow:hidden;
+  position:relative;margin-bottom:14px;
+  height:clamp(160px,25vw,200px);
+  display:flex;align-items:center;justify-content:center;
+}
+.scanner-frame{width:140px;height:100px;position:relative;display:flex;align-items:center;justify-content:center;}
+.corner{position:absolute;width:18px;height:18px;border-color:var(--primary);border-style:solid;}
+.corner.tl{top:0;left:0;border-width:3px 0 0 3px;border-radius:4px 0 0 0;}
+.corner.tr{top:0;right:0;border-width:3px 3px 0 0;border-radius:0 4px 0 0;}
+.corner.bl{bottom:0;left:0;border-width:0 0 3px 3px;border-radius:0 0 0 4px;}
+.corner.br{bottom:0;right:0;border-width:0 3px 3px 0;border-radius:0 0 4px 0;}
+.scan-line{
+  position:absolute;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--primary),transparent);
+  animation:scanMove 2s linear infinite;
+}
+@keyframes scanMove{0%{top:0;}100%{top:100%;}}
+.scanner-icon{color:rgba(255,255,255,0.15);font-size:44px;}
+.scanner-tag{
+  position:absolute;top:12px;
+  background:rgba(0,200,150,0.15);border:1px solid rgba(0,200,150,0.35);
+  color:var(--primary);font-size:11px;font-weight:700;
+  padding:4px 10px;border-radius:20px;
+  display:flex;align-items:center;gap:5px;
+}
+[dir="rtl"] .scanner-tag{left:12px;}
+[dir="ltr"] .scanner-tag{right:12px;}
+.scanner-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--primary);animation:blink 1.2s ease infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}.scanner-hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:rgba(255,255,255,0.45);font-size:11px;font-weight:600;}
 
-        /* =========== FORM =========== */
-        .form-group { margin-bottom: 16px; }
-        .form-label {
-            display: block; font-size: 13px; font-weight: 700;
-            color: var(--dark2); margin-bottom: 6px;
-        }
-        .form-control {
-            width: 100%; padding: 12px 16px;
-            background: var(--light); border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm); font-size: 14px; font-family: inherit;
-            color: var(--dark); outline: none; transition: all 0.2s;
-        }
-        .form-control:focus { border-color: var(--primary); background: var(--white); box-shadow: 0 0 0 3px rgba(0,200,150,0.12); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        @media (max-width: 380px) { .form-row { grid-template-columns: 1fr; } }
+.search-wrap{position:relative;margin-bottom:10px;}
+.search-input{
+  width:100%;padding:13px 44px 13px 14px;
+  background:var(--white);border:2px solid var(--border);
+  border-radius:var(--r-lg);font-size:14px;font-family:inherit;
+  color:var(--dark);outline:none;transition:all .2s;
+  -webkit-appearance:none;
+}
+[dir="rtl"] .search-input{padding:13px 44px 13px 14px;}
+[dir="ltr"] .search-input{padding:13px 14px 13px 44px;}
+.search-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-mid);}
+.search-icon{
+  position:absolute;top:50%;transform:translateY(-50%);
+  color:var(--primary);font-size:15px;pointer-events:none;
+}
+[dir="rtl"] .search-icon{right:15px;}
+[dir="ltr"] .search-icon{left:15px;}
 
-        /* Allergy Chips */
-        .allergy-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-        .allergy-chip {
-            padding: 8px 14px; border: 1.5px solid var(--border);
-            border-radius: 40px; font-size: 13px; font-weight: 600; font-family: inherit;
-            cursor: pointer; transition: all 0.2s; background: var(--white);
-            color: var(--dark2); display: flex; align-items: center; gap: 6px;
-        }
-        .allergy-chip:hover { border-color: var(--primary); color: var(--primary); }
-        .allergy-chip.selected { background: var(--primary); border-color: var(--primary); color: white; }
-        .allergy-chip i { font-size: 12px; }
+.filter-tabs{
+  display:flex;gap:7px;overflow-x:auto;
+  padding:2px 0 8px;scrollbar-width:none;
+}
+.filter-tabs::-webkit-scrollbar{display:none;}
+.filter-tab{
+  padding:7px 14px;border-radius:var(--r-2xl);white-space:nowrap;
+  border:1.5px solid var(--border);background:var(--white);
+  font-size:12px;font-weight:700;font-family:inherit;
+  cursor:pointer;transition:all .2s;color:var(--gray);
+  flex-shrink:0;-webkit-tap-highlight-color:transparent;
+}
+.filter-tab.active{background:var(--primary);border-color:var(--primary);color:#fff;}
 
-        /* =========== SCANNER =========== */
-        .scanner-box {
-            background: var(--dark); border-radius: var(--radius-lg);
-            overflow: hidden; position: relative; margin-bottom: 16px;
-            height: 200px; display: flex; align-items: center; justify-content: center;
-        }
-        .scanner-frame {
-            width: 160px; height: 120px; position: relative;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .scanner-frame::before, .scanner-frame::after {
-            content: ''; position: absolute;
-            width: 20px; height: 20px;
-            border-color: var(--primary); border-style: solid;
-        }
-        .scanner-frame::before { top: 0; left: 0; border-width: 3px 0 0 3px; border-radius: 4px 0 0 0; }
-        .scanner-frame::after { bottom: 0; right: 0; border-width: 0 3px 3px 0; border-radius: 0 0 4px 0; }
-        .scanner-corners::before, .scanner-corners::after {
-            content: ''; position: absolute;
-            width: 20px; height: 20px;
-            border-color: var(--primary); border-style: solid;
-        }
-        .scanner-corners::before { top: 0; right: 0; border-width: 3px 3px 0 0; border-radius: 0 4px 0 0; }
-        .scanner-corners::after { bottom: 0; left: 0; border-width: 0 0 3px 3px; border-radius: 0 0 0 4px; }
-        .scan-line-anim {
-            position: absolute; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            animation: scanMove 2s linear infinite;
-        }
-        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
-        .scanner-icon { color: rgba(255,255,255,0.2); font-size: 48px; }
+.results-list{display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;}
+.result-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;background:var(--white);
+  border:1.5px solid var(--border);border-radius:var(--r-lg);
+  cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;
+}
+.result-item:hover{border-color:var(--primary);box-shadow:var(--shadow-sm);}
+.result-item:active{background:var(--light);}
+.ri-icon{
+  width:40px;height:40px;flex-shrink:0;border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.ri-icon.med{background:#eff6ff;color:#3b82f6;}
+.ri-icon.food{background:#fef3c7;color:#d97706;}
+.ri-icon.supplement{background:#f0fdf4;color:#16a34a;}
+.ri-icon.personal{background:#fdf4ff;color:#a855f7;}
+.ri-info{flex:1;min-width:0;}
+.ri-name{font-size:13px;font-weight:700;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ri-type{font-size:11px;color:var(--gray2);margin-top:2px;}
+.ri-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.ri-dot.safe{background:var(--safe);}
+.ri-dot.warning{background:var(--warning);}
+.ri-dot.danger{background:var(--danger);}
 
-        .scanner-label {
-            position: absolute; bottom: 12px; left: 0; right: 0;
-            text-align: center; color: rgba(255,255,255,0.6);
-            font-size: 12px; font-weight: 600;
-        }
-        .scanner-badge {
-            position: absolute; top: 12px;
-            background: rgba(0,200,150,0.2); border: 1px solid rgba(0,200,150,0.4);
-            color: var(--primary); font-size: 11px; font-weight: 700;
-            padding: 4px 10px; border-radius: 20px;
-        }
-        body.en .scanner-badge { right: 12px; left: auto; }
-        body:not(.en) .scanner-badge { left: 12px; right: auto; }
+/* ===== EMPTY STATE ===== */
+.empty-state{text-align:center;padding:40px 20px;color:var(--gray);}
+.empty-state i{font-size:40px;margin-bottom:14px;display:block;opacity:.35;}
+.empty-state h4{font-size:15px;font-weight:700;margin-bottom:6px;}
+.empty-state p{font-size:12px;line-height:1.7;}
 
-        /* Search */
-        .search-wrap { position: relative; }
-        .search-input {
-            width: 100%; padding: 14px 48px 14px 16px;
-            background: var(--white); border: 2px solid var(--border);
-            border-radius: var(--radius-md); font-size: 15px; font-family: inherit;
-            color: var(--dark); outline: none; transition: all 0.2s;
-        }
-        body.en .search-input { padding: 14px 16px 14px 48px; }
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,200,150,0.12); }
-        .search-icon {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            color: var(--primary); font-size: 16px; pointer-events: none;
-        }
-        body:not(.en) .search-icon { right: 16px; }
-        body.en .search-icon { left: 16px; }
+/* ===== RESULT SCREEN ===== */
+.res-product-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:20px;margin-bottom:12px;
+}
+.res-product-row{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.res-icon{
+  width:60px;height:60px;flex-shrink:0;border-radius:var(--r-md);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+}
+.res-name{font-size:clamp(16px,4vw,22px);font-weight:900;color:var(--dark);line-height:1.2;}
+.res-type{font-size:12px;color:var(--gray);margin-top:3px;}
 
-        /* Category Filter */
-        .filter-tabs {
-            display: flex; gap: 8px; overflow-x: auto;
-            padding: 4px 0; margin-bottom: 12px; scrollbar-width: none;
-        }
-        .filter-tabs::-webkit-scrollbar { display: none; }
-        .filter-tab {
-            padding: 8px 16px; border-radius: 40px; white-space: nowrap;
-            border: 1.5px solid var(--border); background: var(--white);
-            font-size: 13px; font-weight: 700; font-family: inherit;
-            cursor: pointer; transition: all 0.2s; color: var(--gray);
-        }
-        .filter-tab.active { background: var(--primary); border-color: var(--primary); color: white; }
+.safety-banner{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:var(--r-md);
+  border-width:1.5px;border-style:solid;margin-bottom:14px;
+}
+.safety-banner.safe{background:var(--safe-light);border-color:var(--safe);}
+.safety-banner.warning{background:var(--warning-light);border-color:var(--warning);}
+.safety-banner.danger{background:var(--danger-light);border-color:var(--danger);}
+.safety-banner i{font-size:24px;flex-shrink:0;}
+.safety-banner.safe i{color:var(--safe);}
+.safety-banner.warning i{color:var(--warning);}
+.safety-banner.danger i{color:var(--danger);}
+.sb-text strong{font-size:15px;font-weight:800;display:block;}
+.sb-text span{font-size:11px;opacity:.8;}
+.safety-banner.safe .sb-text{color:#065f46;}
+.safety-banner.warning .sb-text{color:#92400e;}
+.safety-banner.danger .sb-text{color:#991b1b;}
 
-        /* Search Results */
-        .search-results { max-height: 360px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-        .result-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 16px; background: var(--white);
-            border: 1.5px solid var(--border); border-radius: var(--radius-md);
-            cursor: pointer; transition: all 0.2s;
-        }
-        .result-item:hover { border-color: var(--primary); box-shadow: var(--shadow-md); }
-        .result-item-icon {
-            width: 40px; height: 40px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center; font-size: 18px;
-            flex-shrink: 0;
-        }
-        .result-item-icon.med { background: #eff6ff; color: #3b82f6; }
-        .result-item-icon.food { background: #fef3c7; color: #d97706; }
-        .result-item-icon.supplement { background: #f0fdf4; color: #16a34a; }
-        .result-item-info { flex: 1; min-width: 0; }
-        .result-item-name { font-size: 14px; font-weight: 700; color: var(--dark); }
-        .result-item-type { font-size: 11px; color: var(--gray); margin-top: 2px; }
-        .result-item-safety {
-            width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-        }
-        .safety-safe { background: var(--safe); }
-        .safety-warning { background: var(--warning); }
-        .safety-danger { background: var(--danger); }
+.alert-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.alert-item{
+  display:flex;align-items:flex-start;gap:9px;
+  padding:11px 14px;border-radius:var(--r-sm);
+  border-inline-start:4px solid;
+}
+.alert-item.danger{background:var(--danger-light);border-color:var(--danger);color:#7f1d1d;}
+.alert-item.warning{background:var(--warning-light);border-color:var(--warning);color:#78350f;}
+.alert-item i{margin-top:1px;flex-shrink:0;font-size:13px;}
+.alert-item p{font-size:12px;font-weight:600;line-height:1.5;}
 
-        .no-results {
-            text-align: center; padding: 32px; color: var(--gray);
-        }
-        .no-results i { font-size: 36px; margin-bottom: 12px; display: block; }
+.info-block{margin-bottom:14px;}
+.info-block h4{font-size:11px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px;}
+.info-block p{font-size:13px;color:var(--dark3);line-height:1.75;}
+.tag-list{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{padding:5px 11px;background:var(--light);border:1px solid var(--border);border-radius:var(--r-2xl);font-size:11px;color:var(--dark3);font-weight:600;}
+.flags-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;}
+.flag-item{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 11px;border-radius:var(--r-sm);
+  border:1px solid var(--border);background:var(--white);
+  color:var(--gray2);
+}
+.flag-item.has{background:var(--danger-light);border-color:#fca5a5;color:#991b1b;}
+.flag-item.has-warn{background:var(--warning-light);border-color:#fcd34d;color:#92400e;}
+.flag-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--border2);}
+.flag-item.has .flag-dot{background:var(--danger);}
+.flag-item.has-warn .flag-dot{background:var(--warning);}
+.flag-item span{font-size:11px;font-weight:700;}
 
-        /* =========== RESULT SCREEN =========== */
-        .result-header-card {
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--radius-lg); padding: 24px; margin-bottom: 12px;
-        }
-        .result-product-row {
-            display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
-        }
-        .result-product-icon {
-            width: 64px; height: 64px; border-radius: var(--radius-md);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 28px; flex-shrink: 0;
-        }
-        .result-product-name { font-size: 22px; font-weight: 900; color: var(--dark); }
-        .result-product-type { font-size: 13px; color: var(--gray); margin-top: 2px; }
+/* ===== RESULT ACTIONS ===== */
+.res-actions{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:10px;}
+.res-actions .btn-secondary{font-size:13px;}
+.res-actions .btn-primary{width:auto;padding:14px 18px;}
 
-        /* Safety Badge */
-        .safety-banner {
-            display: flex; align-items: center; gap: 12px;
-            padding: 16px 20px; border-radius: var(--radius-md);
-            border-width: 1.5px; border-style: solid; margin-bottom: 16px;
-        }
-        .safety-banner.safe { background: var(--safe-light); border-color: var(--safe); }
-        .safety-banner.warning { background: var(--warning-light); border-color: var(--warning); }
-        .safety-banner.danger { background: var(--danger-light); border-color: var(--danger); }
-        .safety-banner i { font-size: 26px; }
-        .safety-banner.safe i { color: var(--safe); }
-        .safety-banner.warning i { color: var(--warning); }
-        .safety-banner.danger i { color: var(--danger); }
-        .safety-banner-text strong { font-size: 16px; font-weight: 800; display: block; }
-        .safety-banner-text span { font-size: 12px; opacity: 0.8; }
-        .safety-banner.safe .safety-banner-text { color: #065f46; }
-        .safety-banner.warning .safety-banner-text { color: #92400e; }
-        .safety-banner.danger .safety-banner-text { color: #991b1b; }
+/* ===== PROFILE ===== */
+.profile-banner{
+  background:linear-gradient(135deg,#00c896,#0ea5e9);
+  border-radius:var(--r-xl);padding:24px;margin-bottom:14px;
+  color:#fff;position:relative;overflow:hidden;
+}
+.profile-banner::before{
+  content:'';position:absolute;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  top:-60px;right:-60px;
+}
+.profile-banner::after{
+  content:'';position:absolute;
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  bottom:-30px;left:20px;
+}
+.pb-avatar{
+  width:58px;height:58px;background:rgba(255,255,255,0.2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:12px;
+}
+.pb-name{font-size:clamp(18px,4vw,22px);font-weight:900;margin-bottom:3px;}
+.pb-meta{font-size:12px;opacity:.85;}
+.pb-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;position:relative;z-index:1;}
+.pb-tag{padding:5px 12px;background:rgba(255,255,255,0.2);border-radius:var(--r-2xl);font-size:11px;font-weight:700;}
 
-        /* Alerts */
-        .alert-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-        .alert-item {
-            display: flex; align-items: flex-start; gap: 10px;
-            padding: 12px 16px; border-radius: var(--radius-sm);
-            border-right: 4px solid;
-        }
-        body.en .alert-item { border-right: none; border-left: 4px solid; }
-        .alert-item.danger { background: var(--danger-light); border-color: var(--danger); color: #7f1d1d; }
-        .alert-item.warning { background: var(--warning-light); border-color: var(--warning); color: #78350f; }
-        .alert-item i { margin-top: 1px; flex-shrink: 0; }
-        .alert-item p { font-size: 13px; font-weight: 600; line-height: 1.5; }
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:14px;}
+.info-tile{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:16px;text-align:center;
+}
+.info-tile i{font-size:22px;color:var(--primary);margin-bottom:8px;display:block;}
+.info-tile strong{display:block;font-size:17px;font-weight:900;color:var(--dark);}
+.info-tile span{font-size:11px;color:var(--gray);}
 
-        /* Info Sections */
-        .info-section { margin-bottom: 16px; }
-        .info-section h4 { font-size: 13px; font-weight: 800; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-        .info-section p { font-size: 14px; color: var(--dark2); line-height: 1.7; }
+.history-list{display:flex;flex-direction:column;gap:7px;}
+.history-item{
+  display:flex;align-items:center;gap:11px;
+  padding:11px 14px;background:var(--white);
+  border:1px solid var(--border);border-radius:var(--r-md);
+}
+.h-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.h-dot.safe{background:var(--safe);}
+.h-dot.warning{background:var(--warning);}
+.h-dot.danger{background:var(--danger);}
+.h-name{font-size:13px;font-weight:700;color:var(--dark3);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.h-time{font-size:11px;color:var(--gray2);flex-shrink:0;}
 
-        .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tag {
-            padding: 5px 12px; background: var(--light); border: 1px solid var(--border);
-            border-radius: 40px; font-size: 12px; color: var(--dark2); font-weight: 600;
-        }
+/* ===== MINI BAR ===== */
+.mini-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
+  padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom));
+  z-index:400;display:none;
+  align-items:center;justify-content:space-between;gap:10px;
+  box-shadow:0 -4px 24px rgba(0,0,0,0.08);
+}
+.mini-bar.show{display:flex;}
+.mb-left{display:flex;align-items:center;gap:10px;min-width:0;}
+.mb-avatar{
+  width:34px;height:34px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:13px;
+}
+.mb-name{font-size:13px;font-weight:800;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mb-sub{font-size:10px;color:var(--gray2);}
+.mb-tags{display:flex;gap:6px;flex-shrink:0;}
+.mb-tag{padding:4px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.mb-tag.blood{background:#fef2f2;color:#dc2626;}
+.mb-tag.allergy{background:#fef9c3;color:#ca8a04;}
 
-        /* Content Flags */
-        .flags-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
-        .flag-item {
-            display: flex; align-items: center; gap: 8px;
-            padding: 10px 12px; border-radius: var(--radius-sm);
-            border: 1px solid var(--border); background: var(--white);
-        }
-        .flag-item.has { background: var(--danger-light); border-color: #fca5a5; }
-        .flag-item.has-warn { background: var(--warning-light); border-color: #fcd34d; }
-        .flag-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-        .flag-item .flag-dot { background: var(--border); }
-        .flag-item.has .flag-dot { background: var(--danger); }
-        .flag-item.has-warn .flag-dot { background: var(--warning); }
-        .flag-item span { font-size: 12px; font-weight: 700; }
-        .flag-item { color: var(--gray); }
-        .flag-item.has { color: #991b1b; }
-        .flag-item.has-warn { color: #92400e; }
+/* ===== ABOUT ===== */
+.about-hero{
+  text-align:center;padding:28px 20px;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r-xl);margin-bottom:14px;
+}
+.about-hero-icon{
+  width:70px;height:70px;border-radius:var(--r-lg);
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;font-size:28px;color:#fff;
+  box-shadow:var(--shadow-green);
+}
+.feat-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.feat-list-item{
+  display:flex;align-items:flex-start;gap:13px;
+  padding:15px;background:var(--white);
+  border:1px solid var(--border);border-radius:var(--r-lg);
+}
+.feat-list-item i{font-size:20px;color:var(--primary);margin-top:2px;flex-shrink:0;}
+.feat-list-item strong{display:block;font-size:13px;font-weight:800;color:var(--dark);margin-bottom:3px;}
+.feat-list-item p{font-size:12px;color:var(--gray);line-height:1.6;}
+.disclaimer{
+  background:#fffbeb;border:1px solid #fde68a;
+  border-radius:var(--r-lg);padding:15px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.disclaimer i{color:var(--warning);font-size:16px;margin-top:2px;flex-shrink:0;}
+.disclaimer p{font-size:12px;color:#78350f;line-height:1.65;}
 
-        /* =========== PROFILE SCREEN =========== */
-        .profile-card {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--radius-lg); padding: 28px; margin-bottom: 16px;
-            color: white; position: relative; overflow: hidden;
-        }
-        .profile-card::before {
-            content: ''; position: absolute;
-            width: 200px; height: 200px; border-radius: 50%;
-            background: rgba(255,255,255,0.07);
-            top: -60px; right: -60px;
-        }
-        .profile-card::after {
-            content: ''; position: absolute;
-            width: 120px; height: 120px; border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            bottom: -30px; left: 20px;
-        }
-        .profile-avatar {
-            width: 64px; height: 64px; background: rgba(255,255,255,0.2);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 28px; margin-bottom: 14px;
-        }
-        .profile-name { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
-        .profile-meta { font-size: 13px; opacity: 0.85; }
-        .profile-tags {
-            display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; position: relative; z-index: 1;
-        }
-        .profile-tag {
-            padding: 6px 14px; background: rgba(255,255,255,0.2);
-            border-radius: 40px; font-size: 12px; font-weight: 700;
-        }
+/* ===== TOAST ===== */
+.toast-wrap{
+  position:fixed;top:calc(var(--nav-h) + 10px);
+  z-index:1000;
+  display:flex;flex-direction:column;gap:7px;
+  pointer-events:none;
+}
+[dir="rtl"] .toast-wrap{right:14px;}
+[dir="ltr"] .toast-wrap{left:14px;}
+.toast{
+  padding:11px 16px;border-radius:var(--r-md);
+  font-size:13px;font-weight:700;font-family:var(--font-ar);
+  box-shadow:var(--shadow-lg);max-width:280px;
+  display:flex;align-items:center;gap:8px;pointer-events:all;
+  animation:toastIn .3s ease;
+}
+body.en .toast{font-family:var(--font-en);}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+.toast.success{background:var(--safe);color:#fff;}
+.toast.error{background:var(--danger);color:#fff;}
+.toast.info{background:var(--secondary);color:#fff;}
 
-        .profile-info-grid {
-            display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 16px;
-        }
-        .profile-info-item {
-            background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--radius-md); padding: 16px; text-align: center;
-        }
-        .profile-info-item i { font-size: 24px; color: var(--primary); margin-bottom: 8px; display: block; }
-        .profile-info-item strong { display: block; font-size: 16px; font-weight: 800; color: var(--dark); }
-        .profile-info-item span { font-size: 12px; color: var(--gray); }
+/* ===== ANIMATIONS ===== */
+.fade-in{animation:fadeIn .35s ease forwards;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.slide-up{animation:slideUp .4s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-        .history-list { display: flex; flex-direction: column; gap: 8px; }
-        .history-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 16px; background: var(--white);
-            border: 1px solid var(--border); border-radius: var(--radius-md);
-        }
-        .history-safety { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-        .history-name { font-size: 13px; font-weight: 700; color: var(--dark2); flex: 1; }
-        .history-time { font-size: 11px; color: var(--gray); }
+/* ===== RESPONSIVE ===== */
 
-        /* =========== MINI PROFILE BAR =========== */
-        .mini-profile-bar {
-            display: none; position: fixed; bottom: 0; left: 0; right: 0;
-            background: var(--white); border-top: 1px solid var(--border);
-            padding: 10px 20px; z-index: 900;
-            align-items: center; justify-content: space-between;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-        }
-        .mini-profile-bar.visible { display: flex; }
-        .mini-profile-left { display: flex; align-items: center; gap: 10px; }
-        .mini-avatar {
-            width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 14px;
-        }
-        .mini-name { font-size: 14px; font-weight: 800; color: var(--dark); }
-        .mini-sub { font-size: 11px; color: var(--gray); }
-        .mini-tags { display: flex; gap: 6px; }
-        .mini-tag {
-            padding: 4px 10px; border-radius: 20px;
-            font-size: 11px; font-weight: 700;
-        }
-        .mini-tag.blood { background: #fef2f2; color: #dc2626; }
-        .mini-tag.allergy { background: #fef9c3; color: #ca8a04; }
+/* Large: 1024px+ */
+@media(min-width:1024px){
+  .navbar-inner{padding:0 32px;}
+  main{max-width:760px;padding-top:32px;}
+  .card{padding:24px;}
+  .form-row{gap:16px;}
+}
 
-        /* =========== ABOUT SCREEN =========== */
-        .about-hero {
-            text-align: center; padding: 32px 0; border-bottom: 1px solid var(--border); margin-bottom: 20px;
-        }
-        .about-version { font-size: 12px; color: var(--gray); margin-top: 8px; }
-        .feature-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-        .feature-list-item {
-            display: flex; align-items: flex-start; gap: 12px;
-            padding: 16px; background: var(--white); border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-        }
-        .feature-list-item i { font-size: 22px; color: var(--primary); margin-top: 2px; flex-shrink: 0; }
-        .feature-list-item strong { display: block; font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 3px; }
-        .feature-list-item p { font-size: 13px; color: var(--gray); line-height: 1.6; }
+/* Medium: 768px–1023px */
+@media(min-width:768px){
+  .btn-hamburger{display:none!important;}
+  .nav-desktop{display:flex;}
+  .mini-bar.show{display:flex;}
+  .stats-row{gap:12px;}
+  .feat-grid{gap:12px;}
+  .info-grid{grid-template-columns:repeat(4,1fr);}
+}
 
-        .disclaimer {
-            background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius-md);
-            padding: 16px; display: flex; gap: 10px; align-items: flex-start;
-        }
-        .disclaimer i { color: var(--warning); flex-shrink: 0; font-size: 18px; margin-top: 1px; }
-        .disclaimer p { font-size: 13px; color: #78350f; line-height: 1.6; }
+/* Small: below 768px */
+@media(max-width:767px){
+  .btn-hamburger{display:flex;}
+  .nav-desktop{display:none;}
+  .navbar-inner{padding:0 14px;}
+  .nav-brand-sub{display:none;}
+  main{padding:16px 12px calc(var(--bar-h) + env(safe-area-inset-bottom) + 16px);}
+  .card{padding:16px;border-radius:var(--r-lg);}
+  .feat-grid{gap:8px;}
+  .stats-row{gap:8px;}
+  .info-grid{grid-template-columns:repeat(2,1fr);}
+  .flags-grid{grid-template-columns:repeat(2,1fr);}
+  .res-actions{grid-template-columns:1fr auto;}
+}
 
-        /* =========== ANIMATIONS =========== */
-        .fade-in { animation: fadeIn 0.35s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+/* XSmall: below 400px */
+@media(max-width:399px){
+  .hero-ring{width:90px;height:90px;}
+  .hero-ring i{font-size:38px;}
+  .feat-grid{gap:6px;}
+  .feat-card{padding:12px 6px;}
+  .feat-card i{font-size:18px;margin-bottom:5px;}
+  .feat-card p{font-size:10px;}
+  .stat-num{font-size:20px;}
+  .stat-lbl{font-size:9px;}
+  .form-row{grid-template-columns:1fr;}
+  .chips{gap:5px;}
+  .chip{font-size:11px;padding:7px 10px;}
+  .flags-grid{grid-template-columns:1fr 1fr;}
+  .mb-tags{display:none;}
+}
 
-        .slide-up { animation: slideUp 0.4s cubic-bezier(.4,0,.2,1) forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+/* Landscape small */
+@media(max-height:500px) and (max-width:900px){
+  .hero{padding:16px 0 12px;}
+  .hero-ring{width:80px;height:80px;}
+  .hero-ring i{font-size:34px;}
+  .scanner-box{height:140px;}
+}
 
-        /* Toasts */
-        .toast-container { position: fixed; top: 80px; right: 16px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
-        body.en .toast-container { right: auto; left: 16px; }
-        .toast {
-            padding: 12px 18px; border-radius: var(--radius-sm);
-            font-size: 13px; font-weight: 700; font-family: inherit;
-            box-shadow: var(--shadow-lg); max-width: 280px;
-            animation: toastIn 0.3s ease; display: flex; align-items: center; gap: 8px;
-        }
-        @keyframes toastIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        .toast.success { background: var(--safe); color: white; }
-        .toast.error { background: var(--danger); color: white; }
-        .toast.info { background: var(--secondary); color: white; }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--light); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .welcome-title { font-size: 26px; }
-            .result-product-name { font-size: 18px; }
-            main { padding: 16px 12px 120px; }
-        }
-        @media (min-width: 641px) { .btn-menu { display: none !important; } }
-
-        /* Print hide */
-        @media print { .navbar, .mini-profile-bar, .side-overlay, .side-menu, .toast-container { display: none !important; } }
-
-        .empty-state { text-align: center; padding: 48px 24px; color: var(--gray); }
-        .empty-state i { font-size: 48px; margin-bottom: 16px; display: block; opacity: 0.4; }
-        .empty-state h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-        .empty-state p { font-size: 13px; line-height: 1.7; }
-    </style>
+/* Print */
+@media print{.navbar,.mini-bar,.drawer,.drawer-overlay,.toast-wrap{display:none!important;}main{padding:0;max-width:100%;}}
+</style>
 </head>
 <body id="body">
 
-<!-- Toast Container -->
-<div class="toast-container" id="toastContainer"></div>
+<!-- Toasts -->
+<div class="toast-wrap" id="toastWrap"></div>
 
-<!-- Side Overlay -->
-<div class="side-overlay" id="sideOverlay" onclick="closeSideMenu()"></div>
+<!-- Drawer Overlay -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 
-<!-- Side Menu (Mobile) -->
-<div class="side-menu" id="sideMenu">
-    <div class="side-menu-header">
-        <div class="nav-logo">
-            <div class="nav-logo-icon"><i class="fas fa-heartbeat"></i></div>
-            <div><div class="nav-logo-text" id="smLogo">واعي</div></div>
-        </div>
-        <button class="side-menu-close" onclick="closeSideMenu()"><i class="fas fa-times"></i></button>
+<!-- Drawer -->
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="nav-brand">
+      <div class="nav-brand-icon"><i class="fas fa-heartbeat"></i></div>
+      <div>
+        <div class="nav-brand-text" id="dLogo">واعي</div>
+      </div>
     </div>
-    <button class="menu-item active" id="smWelcome" onclick="navTo('screen-welcome');closeSideMenu()"><i class="fas fa-home"></i> <span data-key="menuHome">الرئيسية</span></button>
-    <button class="menu-item" id="smScanner" onclick="navTo('screen-scanner');closeSideMenu()" style="display:none"><i class="fas fa-search"></i> <span data-key="menuScan">الفحص</span></button>
-    <button class="menu-item" id="smProfile" onclick="navTo('screen-profile');closeSideMenu()" style="display:none"><i class="fas fa-user"></i> <span data-key="menuProfile">الملف الصحي</span></button>
-    <button class="menu-item" onclick="navTo('screen-about');closeSideMenu()"><i class="fas fa-info-circle"></i> <span data-key="menuAbout">عن التطبيق</span></button>
-    <div style="flex:1"></div>
-    <button class="menu-item" onclick="toggleLanguage();closeSideMenu()"><i class="fas fa-globe"></i> <span id="smLangBtn">English</span></button>
+    <button class="drawer-close" onclick="closeDrawer()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="drawer-nav">
+    <button class="drawer-item active" id="dHome" onclick="navTo('screen-welcome');closeDrawer()"><i class="fas fa-home"></i><span data-k="menuHome">الرئيسية</span></button>
+    <button class="drawer-item" id="dScan" onclick="navTo('screen-scanner');closeDrawer()" style="display:none"><i class="fas fa-search"></i><span data-k="menuScan">الفحص</span></button>
+    <button class="drawer-item" id="dProf" onclick="navTo('screen-profile');closeDrawer()" style="display:none"><i class="fas fa-user"></i><span data-k="menuProfile">ملفي الصحي</span></button>
+    <button class="drawer-item" onclick="navTo('screen-about');closeDrawer()"><i class="fas fa-info-circle"></i><span data-k="menuAbout">عن التطبيق</span></button>
+  </div>
+  <div class="drawer-foot">
+    <button class="drawer-lang" onclick="toggleLang();closeDrawer()"><i class="fas fa-globe"></i><span id="dLangBtn">English</span></button>
+  </div>
 </div>
 
 <!-- Navbar -->
 <nav class="navbar">
-    <div class="navbar-inner">
-        <a class="nav-logo" href="#">
-            <div class="nav-logo-icon"><i class="fas fa-heartbeat"></i></div>
-            <div>
-                <div class="nav-logo-text" id="navLogo">واعي</div>
-                <div class="nav-logo-sub" data-key="navSub">نظام الهوية الصحية</div>
-            </div>
-        </a>
-        <div class="nav-actions">
-            <!-- Desktop nav links -->
-            <div id="desktopNav" style="display:flex;gap:4px;align-items:center">
-                <button class="menu-item" style="display:none" id="dnScanner" onclick="navTo('screen-scanner')"><i class="fas fa-search"></i> <span data-key="menuScan">الفحص</span></button>
-                <button class="menu-item" style="display:none" id="dnProfile" onclick="navTo('screen-profile')"><i class="fas fa-user"></i> <span data-key="menuProfile">الملف الصحي</span></button>
-                <button class="menu-item" onclick="navTo('screen-about')"><i class="fas fa-info-circle"></i> <span data-key="menuAbout">عن التطبيق</span></button>
-            </div>
-            <button class="btn-lang" onclick="toggleLanguage()" id="langBtn">English</button>
-            <button class="btn-menu" onclick="openSideMenu()"><i class="fas fa-bars"></i></button>
-        </div>
+  <div class="navbar-inner">
+    <a class="nav-brand" href="#">
+      <div class="nav-brand-icon"><i class="fas fa-heartbeat"></i></div>
+      <div>
+        <div class="nav-brand-text" id="navLogo">واعي</div>
+        <div class="nav-brand-sub" data-k="navSub">نظام الهوية الصحية</div>
+      </div>
+    </a>
+    <div class="nav-desktop" id="navDesktop">
+      <button class="nav-link" id="nHome" onclick="navTo('screen-welcome')"><i class="fas fa-home"></i><span data-k="menuHome">الرئيسية</span></button>
+      <button class="nav-link" id="nScan" onclick="navTo('screen-scanner')" style="display:none"><i class="fas fa-search"></i><span data-k="menuScan">الفحص</span></button>
+      <button class="nav-link" id="nProf" onclick="navTo('screen-profile')" style="display:none"><i class="fas fa-user"></i><span data-k="menuProfile">ملفي الصحي</span></button>
+      <button class="nav-link" onclick="navTo('screen-about')"><i class="fas fa-info-circle"></i><span data-k="menuAbout">عن التطبيق</span></button>
     </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="btn-lang" onclick="toggleLang()" id="langBtn">English</button>
+      <button class="btn-hamburger" onclick="openDrawer()"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
 </nav>
 
 <main>
 
-    <!-- ===== WELCOME SCREEN ===== -->
-    <section id="screen-welcome" class="active">
-        <div class="welcome-hero fade-in">
-            <div class="hero-icon-wrap">
-                <div class="hero-icon-ring">
-                    <i class="fas fa-shield-virus"></i>
-                </div>
-                <div class="hero-badge" data-key="heroBadge">ذكاء اصطناعي</div>
-            </div>
-            <h2 class="welcome-title" data-key="welcomeTitle">مرحباً بك في واعي</h2>
-            <p class="welcome-desc" data-key="welcomeDesc">نظامك الذكي لفحص المنتجات والأدوية والأغذية بناءً على هويتك الصحية الشخصية.</p>
-        </div>
+<!-- ===== WELCOME ===== -->
+<section id="screen-welcome" class="active">
+  <div class="hero fade-in">
+    <div class="hero-icon-wrap">
+      <div class="hero-ring"><i class="fas fa-shield-virus"></i></div>
+      <span class="hero-badge" data-k="heroBadge">ذكاء اصطناعي</span>
+    </div>
+    <h2 class="hero-title" data-k="welcomeTitle">مرحباً بك في واعي</h2>
+    <p class="hero-desc" data-k="welcomeDesc">نظامك الذكي لفحص المنتجات والأدوية والأغذية بناءً على هويتك الصحية الشخصية.</p>
+  </div>
+  <div class="stats-row fade-in">
+    <div class="stat-box"><div class="stat-num">+80</div><div class="stat-lbl" data-k="statProducts">منتج وغذاء</div></div>
+    <div class="stat-box"><div class="stat-num">+40</div><div class="stat-lbl" data-k="statMeds">دواء ومستحضر</div></div>
+    <div class="stat-box"><div class="stat-num">6</div><div class="stat-lbl" data-k="statAllergies">أنواع حساسية</div></div>
+  </div>
+  <div class="feat-grid fade-in">
+    <div class="feat-card"><i class="fas fa-user-shield"></i><p data-k="feat1">هوية صحية شخصية</p></div>
+    <div class="feat-card"><i class="fas fa-search"></i><p data-k="feat2">فحص فوري دقيق</p></div>
+    <div class="feat-card"><i class="fas fa-bell"></i><p data-k="feat3">تنبيهات ذكية</p></div>
+  </div>
+  <button class="btn-primary fade-in" onclick="goTo('screen-identity')">
+    <i class="fas fa-play"></i><span data-k="btnStart">ابدأ الفحص الآن</span>
+  </button>
+</section>
 
-        <div class="stats-row fade-in">
-            <div class="stat-box"><div class="stat-num">+80</div><div class="stat-label" data-key="statProducts">منتج وغذاء</div></div>
-            <div class="stat-box"><div class="stat-num">+40</div><div class="stat-label" data-key="statMeds">دواء ومستحضر</div></div>
-            <div class="stat-box"><div class="stat-num">6</div><div class="stat-label" data-key="statAllergies">أنواع حساسية</div></div>
-        </div>
+<!-- ===== IDENTITY ===== -->
+<section id="screen-identity">
+  <div class="card slide-up">
+    <div class="card-head">
+      <div class="card-head-icon"><i class="fas fa-id-card"></i></div>
+      <div>
+        <h3 data-k="idTitle">الهوية الصحية المعلوماتية</h3>
+        <p data-k="idSub">أدخل بياناتك لتخصيص تجربة الفحص</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-k="lblName">الاسم الكامل</label>
+      <input type="text" id="fName" class="form-control" data-phk="phName" placeholder="مثال: محمد علي" autocomplete="given-name">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" data-k="lblAge">العمر</label>
+        <input type="number" id="fAge" class="form-control" placeholder="25" min="1" max="120" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-k="lblBlood">فصيلة الدم</label>
+        <select id="fBlood" class="form-control">
+          <option>O+</option><option>A+</option><option>B+</option><option>AB+</option>
+          <option>O-</option><option>A-</option><option>B-</option><option>AB-</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-k="lblGender">الجنس</label>
+      <div style="display:flex;gap:9px;flex-wrap:wrap">
+        <button class="chip sel" id="gM" onclick="selGender('male')"><i class="fas fa-mars"></i><span data-k="gMale">ذكر</span></button>
+        <button class="chip" id="gF" onclick="selGender('female')"><i class="fas fa-venus"></i><span data-k="gFemale">أنثى</span></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-k="lblAllergy">الحساسية والحالات الصحية <span data-k="allergyHint2">(اختياري)</span></label>
+      <div class="chips" id="allergyChips">
+        <button class="chip" onclick="toggleAllergy(this,'sugar')"><i class="fas fa-candy-cane"></i><span data-k="aSugar">سكري</span></button>
+        <button class="chip" onclick="toggleAllergy(this,'caffeine')"><i class="fas fa-coffee"></i><span data-k="aCaffeine">كافيين</span></button>
+        <button class="chip" onclick="toggleAllergy(this,'penicillin')"><i class="fas fa-pills"></i><span data-k="aPenicillin">بنسلين</span></button>
+        <button class="chip" onclick="toggleAllergy(this,'lactose')"><i class="fas fa-cheese"></i><span data-k="aLactose">لاكتوز</span></button>
+        <button class="chip" onclick="toggleAllergy(this,'sodium')"><i class="fas fa-tint"></i><span data-k="aSodium">ضغط دم مرتفع</span></button>
+        <button class="chip" onclick="toggleAllergy(this,'gluten')"><i class="fas fa-bread-slice"></i><span data-k="aGluten">غلوتين</span></button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" data-k="lblWeight">الوزن <span data-k="optKg">(كجم، اختياري)</span></label>
+        <input type="number" id="fWeight" class="form-control" placeholder="70" min="20" max="300" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-k="lblHeight">الطول <span data-k="optCm">(سم، اختياري)</span></label>
+        <input type="number" id="fHeight" class="form-control" placeholder="170" min="50" max="250" inputmode="numeric">
+      </div>
+    </div>
+    <button class="btn-primary" onclick="saveProfile()">
+      <i class="fas fa-save"></i><span data-k="btnSave">حفظ ومتابعة للفحص</span>
+    </button>
+  </div>
+</section>
 
-        <div class="feature-grid fade-in">
-            <div class="feature-card">
-                <i class="fas fa-user-shield"></i>
-                <p data-key="feat1">هوية صحية شخصية</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-search"></i>
-                <p data-key="feat2">فحص فوري دقيق</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-bell"></i>
-                <p data-key="feat3">تنبيهات ذكية</p>
-            </div>
-        </div>
+<!-- ===== SCANNER ===== -->
+<section id="screen-scanner">
+  <div class="card slide-up">
+    <div class="scanner-box">
+      <div class="scan-line"></div>
+      <div class="scanner-frame">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        <i class="fas fa-barcode scanner-icon"></i>
+      </div>
+      <div class="scanner-tag"><span data-k="scanStatus">جاهز للفحص</span></div>
+      <div class="scanner-hint" data-k="scanHint">اكتب اسم المنتج أدناه للبحث الفوري</div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" class="search-input" oninput="doSearch()" data-phk="phSearch" placeholder="ابحث عن منتج، دواء، غذاء...">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" onclick="setFilter('all',this)" data-k="fAll">الكل</button>
+      <button class="filter-tab" onclick="setFilter('med',this)" data-k="fMed">أدوية</button>
+      <button class="filter-tab" onclick="setFilter('food',this)" data-k="fFood">أغذية</button>
+      <button class="filter-tab" onclick="setFilter('supplement',this)" data-k="fSupp">مكملات</button>
+      <button class="filter-tab" onclick="setFilter('personal',this)" data-k="fPersonal">عناية شخصية</button>
+    </div>
+    <div class="results-list" id="searchResults">
+      <div class="empty-state">
+        <i class="fas fa-search"></i>
+        <h4 data-k="searchEmpty">ابدأ البحث</h4>
+        <p data-k="searchEmptyDesc">اكتب اسم المنتج بالعربية أو الإنجليزية للبحث الفوري.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <button class="btn-primary fade-in" onclick="showScreen('screen-identity')">
-            <i class="fas fa-play"></i>
-            <span data-key="btnStart">ابدأ الفحص الآن</span>
-        </button>
-    </section>
+<!-- ===== RESULTS ===== -->
+<section id="screen-results">
+  <div id="resultContent" class="slide-up"></div>
+  <div class="res-actions">
+    <button class="btn-secondary" onclick="navTo('screen-scanner')">
+      <i class="fas fa-arrow-right" id="backIcon"></i><span data-k="btnBack">فحص منتج آخر</span>
+    </button>
+    <button class="btn-primary" onclick="navTo('screen-scanner')"><i class="fas fa-search"></i></button>
+  </div>
+</section>
 
-    <!-- ===== IDENTITY SCREEN ===== -->
-    <section id="screen-identity">
-        <div class="card slide-up">
-            <div class="card-header">
-                <div class="card-header-icon"><i class="fas fa-id-card"></i></div>
-                <div>
-                    <h3 data-key="idTitle">الهوية الصحية المعلوماتية</h3>
-                    <p data-key="idSub">أدخل بياناتك لتخصيص تجربة الفحص</p>
-                </div>
-            </div>
+<!-- ===== PROFILE ===== -->
+<section id="screen-profile">
+  <div id="profileContent" class="slide-up"></div>
+</section>
 
-            <div class="form-group">
-                <label class="form-label" data-key="lblName">الاسم الكامل</label>
-                <input type="text" id="userName" class="form-control" data-placeholder-key="phName" placeholder="مثال: محمد علي">
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label" data-key="lblAge">العمر</label>
-                    <input type="number" id="userAge" class="form-control" placeholder="25" min="1" max="120">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" data-key="lblBlood">فصيلة الدم</label>
-                    <select id="userBlood" class="form-control">
-                        <option value="O+">O+</option><option value="A+">A+</option>
-                        <option value="B+">B+</option><option value="AB+">AB+</option>
-                        <option value="O-">O-</option><option value="A-">A-</option>
-                        <option value="B-">B-</option><option value="AB-">AB-</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" data-key="lblGender">الجنس</label>
-                <div style="display:flex;gap:10px">
-                    <button class="allergy-chip selected" id="genderM" onclick="selectGender('male')"><i class="fas fa-mars"></i> <span data-key="genderMale">ذكر</span></button>
-                    <button class="allergy-chip" id="genderF" onclick="selectGender('female')"><i class="fas fa-venus"></i> <span data-key="genderFemale">أنثى</span></button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" data-key="lblAllergy">الحساسية والحالات الصحية</label>
-                <p style="font-size:12px;color:var(--gray);margin-bottom:10px" data-key="allergyHint">اختر كل ما ينطبق عليك (يمكن اختيار أكثر من واحد)</p>
-                <div class="allergy-chips" id="allergyChips">
-                    <button class="allergy-chip" onclick="toggleAllergy('sugar')"><i class="fas fa-candy-cane"></i> <span data-key="aSugar">سكري</span></button>
-                    <button class="allergy-chip" onclick="toggleAllergy('caffeine')"><i class="fas fa-coffee"></i> <span data-key="aCaffeine">كافيين</span></button>
-                    <button class="allergy-chip" onclick="toggleAllergy('penicillin')"><i class="fas fa-pills"></i> <span data-key="aPenicillin">بنسلين</span></button>
-                    <button class="allergy-chip" onclick="toggleAllergy('lactose')"><i class="fas fa-cheese"></i> <span data-key="aLactose">لاكتوز</span></button>
-                    <button class="allergy-chip" onclick="toggleAllergy('sodium')"><i class="fas fa-tint"></i> <span data-key="aSodium">ضغط دم مرتفع</span></button>
-                    <button class="allergy-chip" onclick="toggleAllergy('gluten')"><i class="fas fa-bread-slice"></i> <span data-key="aGluten">غلوتين</span></button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" data-key="lblWeight">الوزن (كجم) <span style="color:var(--gray);font-weight:400" data-key="optional">(اختياري)</span></label>
-                <input type="number" id="userWeight" class="form-control" placeholder="70" min="20" max="300">
-            </div>
-            <div class="form-group">
-                <label class="form-label" data-key="lblHeight">الطول (سم) <span style="color:var(--gray);font-weight:400" data-key="optional2">(اختياري)</span></label>
-                <input type="number" id="userHeight" class="form-control" placeholder="170" min="50" max="250">
-            </div>
-
-            <button class="btn-primary" onclick="saveIdentity()">
-                <i class="fas fa-save"></i>
-                <span data-key="btnSave">حفظ ومتابعة للفحص</span>
-            </button>
-        </div>
-    </section>
-
-    <!-- ===== SCANNER SCREEN ===== -->
-    <section id="screen-scanner">
-        <div class="card slide-up">
-            <div class="scanner-box">
-                <div class="scan-line-anim"></div>
-                <div class="scanner-frame">
-                    <div class="scanner-corners"></div>
-                    <i class="fas fa-barcode scanner-icon"></i>
-                </div>
-                <div class="scanner-badge"><i class="fas fa-circle" style="font-size:6px;margin-left:4px;color:var(--primary)"></i> <span data-key="scannerStatus">جاهز للفحص</span></div>
-                <div class="scanner-label" data-key="scannerHint">اكتب اسم المنتج أدناه للبحث الفوري</div>
-            </div>
-
-            <div class="search-wrap" style="margin-bottom:12px">
-                <input type="text" id="searchInput" class="search-input" oninput="searchProducts()" data-placeholder-key="phSearch" placeholder="ابحث عن منتج، دواء، غذاء...">
-                <i class="fas fa-search search-icon"></i>
-            </div>
-
-            <div class="filter-tabs" id="filterTabs">
-                <button class="filter-tab active" onclick="setFilter('all',this)" data-key="fAll">الكل</button>
-                <button class="filter-tab" onclick="setFilter('med',this)" data-key="fMed">أدوية</button>
-                <button class="filter-tab" onclick="setFilter('food',this)" data-key="fFood">أغذية</button>
-                <button class="filter-tab" onclick="setFilter('supplement',this)" data-key="fSupp">مكملات</button>
-                <button class="filter-tab" onclick="setFilter('personal',this)" data-key="fPersonal">عناية شخصية</button>
-            </div>
-
-            <div class="search-results" id="searchResults">
-                <div class="empty-state">
-                    <i class="fas fa-search"></i>
-                    <h4 data-key="searchEmpty">ابدأ البحث</h4>
-                    <p data-key="searchEmptyDesc">اكتب اسم المنتج بالعربية أو الإنجليزية للبحث الفوري في قاعدة البيانات.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== RESULTS SCREEN ===== -->
-    <section id="screen-results">
-        <div id="resultContent" class="slide-up"></div>
-        <div style="display:flex;gap:10px;margin-top:8px">
-            <button class="btn-secondary" onclick="showScreen('screen-scanner')">
-                <i class="fas fa-arrow-right"></i>
-                <span data-key="btnBack">فحص منتج آخر</span>
-            </button>
-            <button class="btn-primary" style="flex:0.5" onclick="showScreen('screen-scanner')">
-                <i class="fas fa-search"></i>
-            </button>
-        </div>
-    </section>
-
-    <!-- ===== PROFILE SCREEN ===== -->
-    <section id="screen-profile">
-        <div id="profileContent" class="slide-up"></div>
-    </section>
-
-    <!-- ===== ABOUT SCREEN ===== -->
-    <section id="screen-about">
-        <div class="about-hero fade-in">
-            <div class="nav-logo-icon" style="width:72px;height:72px;font-size:30px;margin:0 auto 16px">
-                <i class="fas fa-heartbeat"></i>
-            </div>
-            <h2 style="font-size:24px;font-weight:900;margin-bottom:4px" data-key="aboutTitle">واعي - Waie</h2>
-            <p class="about-version" data-key="aboutVersion">الإصدار 2.0 | 2025</p>
-            <p style="font-size:14px;color:var(--gray);margin-top:12px;line-height:1.7" data-key="aboutDesc">تطبيق ذكي يساعدك على معرفة مدى سلامة المنتجات والأدوية والأغذية بناءً على هويتك الصحية الشخصية.</p>
-        </div>
-
-        <div class="feature-list">
-            <div class="feature-list-item">
-                <i class="fas fa-user-shield"></i>
-                <div>
-                    <strong data-key="f1Title">هوية صحية مخصصة</strong>
-                    <p data-key="f1Desc">أنشئ ملفاً صحياً شاملاً يتضمن فصيلة الدم والحساسيات والحالات المزمنة.</p>
-                </div>
-            </div>
-            <div class="feature-list-item">
-                <i class="fas fa-database"></i>
-                <div>
-                    <strong data-key="f2Title">قاعدة بيانات شاملة</strong>
-                    <p data-key="f2Desc">أكثر من 120 منتجاً ودواءً وغذاءً مدرجاً في قاعدة بياناتنا مع معلومات دقيقة.</p>
-                </div>
-            </div>
-            <div class="feature-list-item">
-                <i class="fas fa-bell"></i>
-                <div>
-                    <strong data-key="f3Title">تنبيهات ذكية فورية</strong>
-                    <p data-key="f3Desc">يتحقق التطبيق تلقائياً من توافق المنتج مع حالتك الصحية ويحذرك فوراً.</p>
-                </div>
-            </div>
-            <div class="feature-list-item">
-                <i class="fas fa-globe"></i>
-                <div>
-                    <strong data-key="f4Title">ثنائي اللغة</strong>
-                    <p data-key="f4Desc">يعمل بالكامل باللغتين العربية والإنجليزية مع دعم RTL و LTR.</p>
-                </div>
-            </div>
-            <div class="feature-list-item">
-                <i class="fas fa-history"></i>
-                <div>
-                    <strong data-key="f5Title">سجل الفحوصات</strong>
-                    <p data-key="f5Desc">يحتفظ التطبيق بسجل كامل للمنتجات التي فحصتها مسبقاً.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="disclaimer">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p data-key="disclaimer">هذا التطبيق للأغراض المعلوماتية فقط ولا يُغني عن استشارة الطبيب أو الصيدلاني. استشر دائماً متخصصاً في الرعاية الصحية قبل تناول أي دواء.</p>
-        </div>
-    </section>
+<!-- ===== ABOUT ===== -->
+<section id="screen-about">
+  <div class="about-hero fade-in">
+    <div class="about-hero-icon"><i class="fas fa-heartbeat"></i></div>
+    <h2 style="font-size:clamp(20px,4vw,26px);font-weight:900;margin-bottom:4px" data-k="aboutTitle">واعي - Waie</h2>
+    <p style="font-size:12px;color:var(--gray2);margin-bottom:10px" data-k="aboutVersion">الإصدار 2.0 | 2025</p>
+    <p style="font-size:13px;color:var(--gray);line-height:1.75;max-width:400px;margin:0 auto" data-k="aboutDesc">تطبيق ذكي يساعدك على معرفة مدى سلامة المنتجات والأدوية.</p>
+  </div>
+  <div class="feat-list">
+    <div class="feat-list-item"><i class="fas fa-user-shield"></i><div><strong data-k="f1Title">هوية صحية مخصصة</strong><p data-k="f1Desc">أنشئ ملفاً صحياً شاملاً يتضمن فصيلة الدم والحساسيات.</p></div></div>
+    <div class="feat-list-item"><i class="fas fa-database"></i><div><strong data-k="f2Title">قاعدة بيانات شاملة</strong><p data-k="f2Desc">أكثر من 80 منتجاً ودواءً مع معلومات دقيقة.</p></div></div>
+    <div class="feat-list-item"><i class="fas fa-bell"></i><div><strong data-k="f3Title">تنبيهات ذكية فورية</strong><p data-k="f3Desc">يتحقق التطبيق تلقائياً من توافق المنتج مع حالتك.</p></div></div>
+    <div class="feat-list-item"><i class="fas fa-globe"></i><div><strong data-k="f4Title">ثنائي اللغة</strong><p data-k="f4Desc">يعمل بالكامل باللغتين العربية والإنجليزية.</p></div></div>
+    <div class="feat-list-item"><i class="fas fa-history"></i><div><strong data-k="f5Title">سجل الفحوصات</strong><p data-k="f5Desc">يحتفظ التطبيق بسجل كامل للمنتجات التي فحصتها.</p></div></div>
+  </div>
+  <div class="disclaimer">
+    <i class="fas fa-exclamation-triangle"></i>
+    <p data-k="disclaimer">هذا التطبيق للأغراض المعلوماتية فقط ولا يُغني عن استشارة الطبيب أو الصيدلاني.</p>
+  </div>
+</section>
 
 </main>
 
-<!-- Mini Profile Bar -->
-<div class="mini-profile-bar" id="miniProfileBar">
-    <div class="mini-profile-left">
-        <div class="mini-avatar"><i class="fas fa-user"></i></div>
-        <div>
-            <div class="mini-name" id="miniName">---</div>
-            <div class="mini-sub" id="miniSub">---</div>
-        </div>
+<!-- Mini Bar -->
+<div class="mini-bar" id="miniBar">
+  <div class="mb-left">
+    <div class="mb-avatar"><i class="fas fa-user"></i></div>
+    <div style="min-width:0">
+      <div class="mb-name" id="mbName">---</div>
+      <div class="mb-sub" id="mbSub">---</div>
     </div>
-    <div class="mini-tags">
-        <span class="mini-tag blood" id="miniBlood">---</span>
-        <span class="mini-tag allergy" id="miniAllergy">---</span>
-    </div>
+  </div>
+  <div class="mb-tags">
+    <span class="mb-tag blood" id="mbBlood">---</span>
+    <span class="mb-tag allergy" id="mbAllergy" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">---</span>
+  </div>
 </div>
 
 <script>
-// ============================================================
-// DATABASE — 120+ Products
-// ============================================================
-const products = [
-    // ---- MEDICINES ----
-    {id:1, name_ar:"بنادول أكسترا", name_en:"Panadol Extra", type:"med",
-     ingredients:["Paracetamol 500mg","Caffeine 65mg"], safety:"warning",
-     sugar:false, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مسكن للآلام وخافض للحرارة. يحتوي على الكافيين لتعزيز التأثير المسكن. غير موصى به للمصابين بأمراض الكبد أو مدمني الكحول.",
-     desc_en:"Pain reliever and fever reducer. Contains caffeine to boost analgesic effect. Not recommended for liver disease or alcohol dependency."},
-    {id:2, name_ar:"أوميبرازول 20", name_en:"Omeprazole 20mg", type:"med",
-     ingredients:["Omeprazole 20mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مثبط لمضخة البروتون يُستخدم لعلاج حموضة المعدة وقرحة المعدة والاثني عشر. آمن للاستخدام طويل الأمد.",
-     desc_en:"Proton pump inhibitor for gastric acidity, ulcers. Safe for long-term use."},
-    {id:3, name_ar:"أوجمنتين 625", name_en:"Augmentin 625", type:"med",
-     ingredients:["Amoxicillin 500mg","Clavulanic Acid 125mg"], safety:"danger",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:true, gluten:false, sodium:false,
-     desc_ar:"مضاد حيوي واسع الطيف. ممنوع تماماً لمن لديهم حساسية من البنسلين. قد يسبب إسهالاً وغثياناً.",
-     desc_en:"Broad-spectrum antibiotic. Strictly prohibited for penicillin allergy. May cause diarrhea and nausea."},
-    {id:4, name_ar:"فولتارين جيل 1%", name_en:"Voltaren Gel 1%", type:"med",
-     ingredients:["Diclofenac Sodium 1%"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مسكن موضعي لآلام المفاصل والعضلات. آمن جداً إذ أن امتصاصه الجهازي ضئيل جداً.",
-     desc_en:"Topical pain reliever for joints and muscles. Very safe due to minimal systemic absorption."},
-    {id:5, name_ar:"بروفين 400", name_en:"Brufen 400", type:"med",
-     ingredients:["Ibuprofen 400mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد للالتهاب ومسكن للآلام. يجب تناوله مع الطعام. قد يؤثر على المعدة والكلى عند الاستخدام المطوّل.",
-     desc_en:"Anti-inflammatory and pain reliever. Take with food. May affect stomach and kidneys with prolonged use."},
-    {id:6, name_ar:"كلاريتين 10", name_en:"Claritin 10mg", type:"med",
-     ingredients:["Loratadine 10mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد للهيستامين من الجيل الثاني لا يسبب النعاس. مناسب لحساسية الأنف والجلد.",
-     desc_en:"Second-generation antihistamine. Non-drowsy. Suitable for nasal and skin allergies."},
-    {id:7, name_ar:"دايميكرون 80", name_en:"Diamicron 80mg", type:"med",
-     ingredients:["Gliclazide 80mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"علاج لمرض السكري النوع الثاني. قد يسبب انخفاض السكر (هيبوغلايسيميا). مراقبة السكر مطلوبة.",
-     desc_en:"Type 2 diabetes medication. May cause hypoglycemia. Blood sugar monitoring required."},
-    {id:8, name_ar:"كونكور 5", name_en:"Concor 5mg", type:"med",
-     ingredients:["Bisoprolol Fumarate 5mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"حاصر بيتا لعلاج ارتفاع ضغط الدم وأمراض القلب. لا يُوقف فجأة دون استشارة الطبيب.",
-     desc_en:"Beta blocker for hypertension and heart disease. Never stop abruptly without doctor's advice."},
-    {id:9, name_ar:"سولبادين", name_en:"Solpadeine", type:"med",
-     ingredients:["Paracetamol 500mg","Codeine 8mg","Caffeine 30mg"], safety:"danger",
-     sugar:false, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مسكن قوي يحتوي على الكوديين المخدر. يسبب الإدمان. يُمنع على الأطفال أقل من 12 سنة والحوامل.",
-     desc_en:"Strong analgesic with codeine narcotic. Addictive. Prohibited for children under 12 and pregnant women."},
-    {id:10, name_ar:"فينتولين بخاخ", name_en:"Ventolin Inhaler", type:"med",
-     ingredients:["Salbutamol 100mcg/dose"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"موسع للشعب الهوائية لعلاج نوبات الربو الحادة. سريع المفعول ويبدأ خلال دقائق.",
-     desc_en:"Bronchodilator for acute asthma attacks. Fast-acting, works within minutes."},
-    {id:11, name_ar:"أدول 500", name_en:"Adol 500", type:"med",
-     ingredients:["Paracetamol 500mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"خافض حرارة ومسكن آمن للكبار والأطفال. لا يتجاوز 4 جرام يومياً للبالغين.",
-     desc_en:"Safe antipyretic and analgesic for adults and children. Max 4g/day for adults."},
-    {id:12, name_ar:"جلوكوفاج 500", name_en:"Glucophage 500", type:"med",
-     ingredients:["Metformin HCl 500mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"علاج السكري النوع الثاني الأول اختياراً. يُعطى مع الطعام. مناسب للمرضى ذوي الوزن الزائد.",
-     desc_en:"First-line type 2 diabetes treatment. Take with food. Suitable for overweight patients."},
-    {id:13, name_ar:"نيكسيوم 20", name_en:"Nexium 20mg", type:"med",
-     ingredients:["Esomeprazole 20mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مثبط فعّال لحموضة المعدة. يُؤخذ قبل الأكل بـ 30 دقيقة لأفضل فاعلية.",
-     desc_en:"Effective stomach acid inhibitor. Take 30 minutes before meals for best efficacy."},
-    {id:14, name_ar:"ليبيتور 20", name_en:"Lipitor 20mg", type:"med",
-     ingredients:["Atorvastatin 20mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"علاج ارتفاع الكوليسترول. قد يسبب آلاماً عضلية نادراً. يراقب وظائف الكبد بانتظام.",
-     desc_en:"Cholesterol-lowering medication. Rarely causes muscle pain. Liver function monitoring needed."},
-    {id:15, name_ar:"زوكور 20", name_en:"Zocor 20mg", type:"med",
-     ingredients:["Simvastatin 20mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"علاج الكوليسترول. يُؤخذ مساءً. يُحظر تناول عصير الجريب فروت أثناء العلاج.",
-     desc_en:"Cholesterol treatment. Take at night. Avoid grapefruit juice during treatment."},
-    {id:16, name_ar:"كلافيروم (أموكسيسيلين)", name_en:"Amoxicillin 500", type:"med",
-     ingredients:["Amoxicillin 500mg"], safety:"danger",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:true, gluten:false, sodium:false,
-     desc_ar:"مضاد حيوي بيتا لاكتام. ممنوع لمرضى الحساسية من البنسلين. يُكمل الجرعة كاملة.",
-     desc_en:"Beta-lactam antibiotic. Forbidden for penicillin-allergic patients. Complete the full course."},
-    {id:17, name_ar:"فنستيل قطرات", name_en:"Fenistil Drops", type:"med",
-     ingredients:["Dimetindene maleate 1mg/ml"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد حساسية وحكة للكبار والأطفال. يسبب نعاساً خفيفاً في البداية.",
-     desc_en:"Antihistamine for allergy and itching, adults and children. May cause mild drowsiness."},
-    {id:18, name_ar:"بيتادين مطهر", name_en:"Betadine Antiseptic", type:"personal",
-     ingredients:["Povidone-iodine 10%"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مطهر خارجي قوي للجروح والجروح البسيطة. لا يُستخدم داخلياً. قد يصبغ الجلد باللون البني.",
-     desc_en:"Strong external antiseptic for wounds. Not for internal use. May stain skin brown."},
-    {id:19, name_ar:"كتافاست فوار", name_en:"Catafast Sachets", type:"med",
-     ingredients:["Diclofenac Potassium 50mg","Sodium"], safety:"danger",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"مسكن سريع للألم. يحتوي على صوديوم عالٍ (ممنوع لمرضى ضغط الدم). يذاب في ماء.",
-     desc_en:"Fast pain reliever. High sodium content (prohibited for hypertension). Dissolve in water."},
-    {id:20, name_ar:"ترايمول", name_en:"Trimol (Co-trimoxazole)", type:"med",
-     ingredients:["Sulfamethoxazole 400mg","Trimethoprim 80mg"], safety:"danger",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد حيوي سلفا. ممنوع في الفشل الكلوي الحاد وفقر دم G6PD. يزيد التحسس للشمس.",
-     desc_en:"Sulfa antibiotic. Prohibited in renal failure and G6PD anemia. Increases photosensitivity."},
-    {id:21, name_ar:"فيتامين سي 1000 فوار", name_en:"Vitamin C 1000 Effervescent", type:"supplement",
-     ingredients:["Ascorbic Acid 1000mg","Sodium Bicarbonate"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"مقوي للمناعة. يحتوي على صوديوم عالٍ في شكله الفوار. قد يزيد من ترسب حصوات الكلى.",
-     desc_en:"Immunity booster. Effervescent form is high in sodium. May increase kidney stone risk."},
-    {id:22, name_ar:"زنك 10", name_en:"Zinc 10mg", type:"supplement",
-     ingredients:["Zinc Gluconate 10mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مكمل الزنك لدعم المناعة والتئام الجروح. لا يؤخذ على معدة فارغة.",
-     desc_en:"Zinc supplement for immunity and wound healing. Don't take on empty stomach."},
-    {id:23, name_ar:"أوميغا 3 (سمك)", name_en:"Omega-3 Fish Oil", type:"supplement",
-     ingredients:["EPA 360mg","DHA 240mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مفيد لصحة القلب والمخ. يمكن أن يزيد من سيولة الدم عند جرعات عالية.",
-     desc_en:"Beneficial for heart and brain health. High doses may increase blood thinning."},
-    {id:24, name_ar:"ميلاتونين 5", name_en:"Melatonin 5mg", type:"supplement",
-     ingredients:["Melatonin 5mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"منظم لدورة النوم. يُؤخذ قبل النوم بـ 30 دقيقة. غير مُدمن. آمن للاستخدام قصير الأمد.",
-     desc_en:"Sleep cycle regulator. Take 30 minutes before bed. Non-addictive. Safe for short-term use."},
-    {id:25, name_ar:"كالسيوم + فيتامين د", name_en:"Calcium + Vitamin D", type:"supplement",
-     ingredients:["Calcium Carbonate 500mg","Vitamin D3 400 IU"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"لصحة العظام والأسنان. يُؤخذ مع وجبة. تجنب الجمع مع بعض المضادات الحيوية.",
-     desc_en:"For bone and dental health. Take with meal. Avoid combining with some antibiotics."},
-
-    // ---- FOOD & BEVERAGES ----
-    {id:26, name_ar:"بيبسي كولا 330مل", name_en:"Pepsi Cola 330ml", type:"food",
-     ingredients:["Carbonated Water","High Fructose Corn Syrup","Caffeine","Phosphoric Acid","Caramel Color"],
-     safety:"danger", sugar:true, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"يحتوي على 41 جرام سكر و38 ملغ كافيين في العلبة. مرتفع جداً للسعرات الحرارية وضار لمرضى السكري وحساسية الكافيين.",
-     desc_en:"Contains 41g sugar and 38mg caffeine per can. High calories, harmful for diabetics and caffeine-sensitive."},
-    {id:27, name_ar:"ريد بول 250مل", name_en:"Red Bull 250ml", type:"food",
-     ingredients:["Caffeine 80mg","Taurine","B Vitamins","Sugar 27g"],
-     safety:"danger", sugar:true, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مشروب طاقة عالي الكافيين. يُمنع تماماً للأطفال، الحوامل، ومرضى القلب. لا يُمزج مع الكحول.",
-     desc_en:"High-caffeine energy drink. Strictly prohibited for children, pregnant women, heart patients. Never mix with alcohol."},
-    {id:28, name_ar:"حليب المراعي كامل الدسم", name_en:"Almarai Full Fat Milk", type:"food",
-     ingredients:["Whole Milk","Vitamins A & D","Lactose"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:true, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"غني بالكالسيوم والبروتين. يحتوي على لاكتوز طبيعي (تجنبه إذا لديك عدم تحمل اللاكتوز).",
-     desc_en:"Rich in calcium and protein. Contains natural lactose (avoid if lactose intolerant)."},
-    {id:29, name_ar:"بطاطس ليز ملح", name_en:"Lay's Classic Salted", type:"food",
-     ingredients:["Potato","Sunflower Oil","Salt 1.6g/100g"],
-     safety:"warning", sugar:false, caffeine:false, salt:true, lactose:false, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"صوديوم مرتفع نسبياً. غير صحي بالكميات الكبيرة لمرضى ضغط الدم. دهون مشبعة.",
-     desc_en:"High sodium. Unhealthy in large amounts for hypertension patients. Contains saturated fats."},
-    {id:30, name_ar:"نوتيلا 200جم", name_en:"Nutella 200g", type:"food",
-     ingredients:["Sugar 57%","Palm Oil","Hazelnuts 13%","Skim Milk Powder","Cocoa"],
-     safety:"danger", sugar:true, caffeine:false, salt:false, lactose:true, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"محتوى سكر مرتفع جداً (57% سكر). خطر على مرضى السكري. يحتوي أيضاً على مشتقات الحليب.",
-     desc_en:"Very high sugar content (57% sugar). Dangerous for diabetics. Contains milk derivatives."},
-    {id:31, name_ar:"قهوة نسكافيه ذهب", name_en:"Nescafe Gold", type:"food",
-     ingredients:["Instant Coffee","Caffeine ~60mg/cup"],
-     safety:"warning", sugar:false, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"تركيز كافيين متوسط إلى عالٍ. قد يزيد من ضغط الدم ويسبب الأرق عند الإفراط.",
-     desc_en:"Medium to high caffeine. May increase blood pressure and cause insomnia if overused."},
-    {id:32, name_ar:"عصير برتقال المراعي 100%", name_en:"Almarai 100% Orange Juice", type:"food",
-     ingredients:["Concentrated Orange Juice","Vitamin C"],
-     safety:"safe", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"سكر طبيعي الفركتوز. مفيد للمناعة. مرضى السكري يجب تحديد الكميات. GI متوسط.",
-     desc_en:"Natural fructose sugar. Good for immunity. Diabetics should limit portions. Medium GI."},
-    {id:33, name_ar:"شوفان كويكر الأصلي", name_en:"Quaker Oats Original", type:"food",
-     ingredients:["Whole Grain Oats","Beta-Glucan Fiber"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:true, sodium:false,
-     desc_ar:"غني بالألياف ويخفض الكوليسترول. منخفض GI. يحتوي جلوتين طبيعياً. صحي للقلب.",
-     desc_en:"Fiber-rich, cholesterol-lowering. Low GI. Contains natural gluten. Heart-healthy."},
-    {id:34, name_ar:"تونة قودي بالماء", name_en:"Goody Tuna in Water", type:"food",
-     ingredients:["Skipjack Tuna","Water","Salt"],
-     safety:"safe", sugar:false, caffeine:false, salt:true, lactose:false, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"بروتين عالي الجودة وأوميغا 3. صوديوم متوسط. خيار صحي للرياضيين.",
-     desc_en:"High-quality protein and omega-3. Moderate sodium. Healthy choice for athletes."},
-    {id:35, name_ar:"كوكاكولا زيرو 330مل", name_en:"Coca Cola Zero 330ml", type:"food",
-     ingredients:["Carbonated Water","Caramel","Phosphoric Acid","Aspartame","Acesulfame K","Caffeine 32mg"],
-     safety:"warning", sugar:false, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"خالٍ من السكر لكن يحتوي على كافيين ومحليات صناعية. قد يزيد الشهية بحسب الدراسات. حمض يضعف الأسنان.",
-     desc_en:"Sugar-free but contains caffeine and artificial sweeteners. May increase appetite. Acidic, weakens enamel."},
-    {id:36, name_ar:"حليب صويا المراعي", name_en:"Almarai Soy Milk", type:"food",
-     ingredients:["Soy Extract","Calcium","Vitamins"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"بديل ممتاز للحليب، خالٍ تماماً من اللاكتوز. مفيد لعدم تحمل اللاكتوز والنباتيين.",
-     desc_en:"Excellent milk alternative, completely lactose-free. Good for lactose intolerance and vegans."},
-    {id:37, name_ar:"عسل سدر طبيعي", name_en:"Natural Sidr Honey", type:"food",
-     ingredients:["Fructose 38.5%","Glucose 31%","Natural Enzymes","Antioxidants"],
-     safety:"warning", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مفيد جداً طبياً ومضاد حيوي طبيعي. لكنه يرفع السكر بشكل ملحوظ. مرضى السكري: جرعة صغيرة جداً.",
-     desc_en:"Medically beneficial natural antibiotic. But raises blood sugar significantly. Diabetics: very small doses only."},
-    {id:38, name_ar:"خبز الحبوب الكاملة", name_en:"Whole Grain Bread", type:"food",
-     ingredients:["Whole Wheat Flour","Yeast","Salt","Water","Gluten"],
-     safety:"safe", sugar:false, caffeine:false, salt:true, lactose:false, penicillin:false, gluten:true, sodium:false,
-     desc_ar:"غني بالألياف والمعادن. أفضل من الخبز الأبيض لمرضى السكري. يحتوي غلوتين.",
-     desc_en:"Rich in fiber and minerals. Better than white bread for diabetics. Contains gluten."},
-    {id:39, name_ar:"أرز بسمتي", name_en:"Basmati Rice", type:"food",
-     ingredients:["Long Grain Rice","Complex Carbohydrates"],
-     safety:"safe", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مصدر رئيسي للطاقة. GI متوسط (أقل من الرز الأبيض العادي). مرضى السكري يحددون الكمية.",
-     desc_en:"Main energy source. Medium GI (lower than regular white rice). Diabetics control portion."},
-    {id:40, name_ar:"زيت زيتون بكر ممتاز", name_en:"Extra Virgin Olive Oil", type:"food",
-     ingredients:["Oleic Acid 73%","Polyphenols","Vitamin E"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"من أفضل الدهون الصحية. مفيد للقلب والكوليسترول. الأفضل للاستخدام بارداً.",
-     desc_en:"One of the healthiest fats. Excellent for heart and cholesterol. Best used cold."},
-    {id:41, name_ar:"إندومي خضار", name_en:"Indomie Vegetables", type:"food",
-     ingredients:["Wheat Noodles","Salt 1.8g/pack","MSG","Palm Oil","Gluten"],
-     safety:"danger", sugar:false, caffeine:false, salt:true, lactose:false, penicillin:false, gluten:true, sodium:true,
-     desc_ar:"أملاح ضارة جداً وصوديوم مرتفع. MSG (مونوسوديوم غلوتامات) قد يسبب الصداع. فقير غذائياً.",
-     desc_en:"Very harmful salts and high sodium. MSG may cause headaches. Nutritionally poor."},
-    {id:42, name_ar:"ميراندا برتقال 350مل", name_en:"Mirinda Orange 350ml", type:"food",
-     ingredients:["Carbonated Water","Sugar 45g","Citric Acid","Artificial Flavors","Colors"],
-     safety:"danger", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"سكريات صناعية عالية جداً (45 جرام للعبوة الواحدة). صبغات صناعية ومواد حافظة.",
-     desc_en:"Very high artificial sugars (45g per bottle). Artificial dyes and preservatives."},
-    {id:43, name_ar:"جبنة كرافت شيدر", name_en:"Kraft Cheddar Slices", type:"food",
-     ingredients:["Milk","Sodium Phosphate","Salt 1.4%","Lactose"],
-     safety:"warning", sugar:false, caffeine:false, salt:true, lactose:true, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"أملاح فوسفاتية وصوديوم عالٍ. يحتوي لاكتوز. جيد للبروتين والكالسيوم لكن بكميات معتدلة.",
-     desc_en:"High phosphate salts and sodium. Contains lactose. Good protein and calcium source in moderation."},
-    {id:44, name_ar:"زبادي يوناني سادة", name_en:"Greek Yogurt Plain", type:"food",
-     ingredients:["Whole Milk","Live Cultures","Lactose"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:true, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مصدر ممتاز للبروتين والبروبيوتيك. مفيد للهضم والأمعاء. يحتوي على لاكتوز.",
-     desc_en:"Excellent protein and probiotic source. Good for digestion and gut health. Contains lactose."},
-    {id:45, name_ar:"جلاكسي شوكولاتة 45جم", name_en:"Galaxy Chocolate 45g", type:"food",
-     ingredients:["Sugar 60%","Cocoa Butter","Milk","Cocoa Mass"],
-     safety:"danger", sugar:true, caffeine:false, salt:false, lactose:true, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"محتوى سكر مرتفع جداً. يحتوي على مشتقات الحليب. الكاكاو يحتوي ثيوبرومين مشابه للكافيين.",
-     desc_en:"Very high sugar content. Contains milk derivatives. Cocoa contains theobromine similar to caffeine."},
-    {id:46, name_ar:"برينجلز أصلي", name_en:"Pringles Original", type:"food",
-     ingredients:["Dried Potato","Starch","Sunflower Oil","Salt 1.3g/30g","Dextrose"],
-     safety:"danger", sugar:false, caffeine:false, salt:true, lactose:false, penicillin:false, gluten:true, sodium:true,
-     desc_ar:"نشويات مصنعة مع صوديوم مرتفع. يحتوي أكريلاميد (ناتج القلي). فقير غذائياً.",
-     desc_en:"Processed starches with high sodium. Contains acrylamide (frying byproduct). Nutritionally poor."},
-    {id:47, name_ar:"شاي ليبتون أخضر", name_en:"Lipton Green Tea", type:"food",
-     ingredients:["Green Tea Leaves","Caffeine 20-30mg/cup","Antioxidants"],
-     safety:"safe", sugar:false, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"غني بمضادات الأكسدة والكاتيشين. كافيين منخفض نسبياً. مفيد للتمثيل الغذائي وصحة القلب.",
-     desc_en:"Rich in antioxidants and catechins. Relatively low caffeine. Beneficial for metabolism and heart."},
-    {id:48, name_ar:"تمر المدينة المجفف", name_en:"Dates (Medinah)", type:"food",
-     ingredients:["Fructose 32%","Glucose 24%","Fiber","Potassium","Magnesium"],
-     safety:"warning", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"غذاء ممتاز وغني بالمعادن. لكن سكره مرتفع جداً. مرضى السكري يأكلون بحذر (2-3 تمرات).",
-     desc_en:"Excellent food, rich in minerals. But very high sugar. Diabetics eat cautiously (2-3 dates max)."},
-    {id:49, name_ar:"مكسرات مشكلة بدون ملح", name_en:"Unsalted Mixed Nuts", type:"food",
-     ingredients:["Almonds","Cashews","Walnuts","Peanuts","Healthy Fats"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"دهون صحية أحادية وثنائية غير مشبعة. بروتين عالٍ. مفيد للقلب. بكميات معتدلة.",
-     desc_en:"Mono and polyunsaturated healthy fats. High protein. Beneficial for heart. In moderation."},
-    {id:50, name_ar:"ماء معدني نون 1.5 لتر", name_en:"Noon Mineral Water 1.5L", type:"food",
-     ingredients:["Pure Water","Minerals (Ca, Mg, Na)"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"ماء شرب نقي بمعادن طبيعية. آمن للجميع. ضروري للترطيب اليومي.",
-     desc_en:"Pure drinking water with natural minerals. Safe for everyone. Essential for daily hydration."},
-    {id:51, name_ar:"فنجان نسبريسو إسبريسو", name_en:"Nespresso Espresso", type:"food",
-     ingredients:["Arabica Coffee","Caffeine 60-90mg/cup"],
-     safety:"warning", sugar:false, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"كافيين مركّز. قد يرفع ضغط الدم مؤقتاً. غير موصى به على معدة فارغة أو لحساسي الكافيين.",
-     desc_en:"Concentrated caffeine. May temporarily raise blood pressure. Not recommended on empty stomach."},
-    {id:52, name_ar:"بسكويت أوريو", name_en:"Oreo Biscuits 95g", type:"food",
-     ingredients:["Enriched Flour","Sugar 43%","Palm Oil","Cocoa","Gluten"],
-     safety:"danger", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:true, sodium:false,
-     desc_ar:"سكر وزيوت مهدرجة مرتفعة. دهون ترانس. غلوتين عالٍ. فقير غذائياً.",
-     desc_en:"High sugar and hydrogenated oils. Trans fats. High gluten. Nutritionally poor."},
-    {id:53, name_ar:"زبادي نادك الفراولة", name_en:"Nadec Strawberry Yogurt", type:"food",
-     ingredients:["Milk","Sugar","Strawberry Flavoring","Lactose","Probiotics"],
-     safety:"warning", sugar:true, caffeine:false, salt:false, lactose:true, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"سكر مضاف نسبته متوسطة. يحتوي على لاكتوز وبروبيوتيك. أفضل من المحلى بالسكر المكرر.",
-     desc_en:"Moderate added sugar. Contains lactose and probiotics. Better than refined sugar versions."},
-    {id:54, name_ar:"شوكولاتة داكنة 85%", name_en:"Dark Chocolate 85%", type:"food",
-     ingredients:["Cocoa Mass 85%","Cocoa Butter","Sugar 12%","Vanilla"],
-     safety:"safe", sugar:false, caffeine:true, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"غني بمضادات الأكسدة والفلافونويد. مفيد للقلب. سكر منخفض. يحتوي كافيين خفيف.",
-     desc_en:"Rich in antioxidants and flavonoids. Good for heart. Low sugar. Contains mild caffeine."},
-
-    // ---- PERSONAL CARE ----
-    {id:55, name_ar:"فازلين جيل أصلي", name_en:"Vaseline Original Jelly", type:"personal",
-     ingredients:["White Petrolatum 100%"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مرطب جلدي آمن وفعّال. لا يسبب حساسية. مناسب لجميع أنواع البشرة والفئات العمرية.",
-     desc_en:"Safe and effective skin moisturizer. Non-allergenic. Suitable for all skin types and ages."},
-    {id:56, name_ar:"شامبو هيد آند شولدرز", name_en:"Head & Shoulders Shampoo", type:"personal",
-     ingredients:["Zinc Pyrithione 1%","Sodium Lauryl Sulfate","Conditioners"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"فعّال لعلاج القشرة وفروة الرأس الدهنية. للاستخدام الخارجي فقط.",
-     desc_en:"Effective for dandruff and oily scalp. For external use only."},
-    {id:57, name_ar:"كريم نيفيا للجسم", name_en:"NIVEA Body Cream", type:"personal",
-     ingredients:["Glycerin","Mineral Oil","Panthenol","Fragrance"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مرطب مكثف للجلد الجاف. العطر قد يسبب حساسية لبعض الأشخاص. آمن للاستخدام اليومي.",
-     desc_en:"Intensive moisturizer for dry skin. Fragrance may irritate sensitive skin. Safe for daily use."},
-    {id:58, name_ar:"معجون أسنان كولجيت", name_en:"Colgate Total Toothpaste", type:"personal",
-     ingredients:["Fluoride 1450ppm","Sodium Lauryl Sulfate","Triclosan","Glycerin"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"حماية كاملة للأسنان. لا يُبلع. الفلورايد ضار إذا ابتلعه الأطفال الصغار.",
-     desc_en:"Complete tooth protection. Do not swallow. Fluoride harmful if swallowed by young children."},
-
-    // ---- SUPPLEMENTS ----
-    {id:59, name_ar:"بروتين واي ذهب", name_en:"Whey Protein Gold", type:"supplement",
-     ingredients:["Whey Protein Concentrate","Lactose","Artificial Flavors"],
-     safety:"warning", sugar:false, caffeine:false, salt:false, lactose:true, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مصدر ممتاز للبروتين للرياضيين. يحتوي على لاكتوز. مرضى الكلى يتحاشون الجرعات الزائدة.",
-     desc_en:"Excellent protein source for athletes. Contains lactose. Kidney patients avoid high doses."},
-    {id:60, name_ar:"كرياتين مونوهيدرات", name_en:"Creatine Monohydrate", type:"supplement",
-     ingredients:["Creatine Monohydrate 5g/serving"],
-     safety:"warning", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مكمل رياضي فعّال لزيادة القوة والكتلة العضلية. يزيد من احتباس الماء في العضلات. يشرب ماء وفير.",
-     desc_en:"Effective sports supplement for strength and muscle mass. Increases water retention. Drink plenty of water."},
-
-    // More foods
-    {id:61, name_ar:"خيار طازج", name_en:"Fresh Cucumber", type:"food",
-     ingredients:["Water 96%","Fiber","Vitamin K","Potassium"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"خضار ترطيبي منخفض السعرات. آمن تماماً لجميع الفئات. مثالي لمرضى السكري والضغط.",
-     desc_en:"Hydrating vegetable, low calorie. Completely safe for everyone. Ideal for diabetics and hypertension."},
-    {id:62, name_ar:"موز طازج", name_en:"Fresh Banana", type:"food",
-     ingredients:["Potassium 422mg","Vitamin B6","Natural Sugars","Fiber"],
-     safety:"safe", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"غني بالبوتاسيوم ومفيد للقلب والعضلات. سكر طبيعي. مرضى السكري يأكلون حبة واحدة.",
-     desc_en:"Rich in potassium, good for heart and muscles. Natural sugar. Diabetics limit to one banana."},
-    {id:63, name_ar:"لحم دجاج مسلوق", name_en:"Boiled Chicken Breast", type:"food",
-     ingredients:["Protein 31g/100g","B Vitamins","Niacin","Selenium"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"أفضل مصدر للبروتين الخالي من الدهون. منخفض السعرات والكوليسترول. مثالي للرياضيين والمرضى.",
-     desc_en:"Best lean protein source. Low calorie and cholesterol. Ideal for athletes and patients."},
-    {id:64, name_ar:"سمك سلمون مشوي", name_en:"Grilled Salmon", type:"food",
-     ingredients:["Omega-3 2.2g/100g","Protein 25g","Vitamin D","B12"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"من أفضل الأطعمة لصحة القلب والمخ. أوميغا 3 مرتفع. فيتامين D طبيعي.",
-     desc_en:"One of the best foods for heart and brain. High omega-3. Natural vitamin D."},
-    {id:65, name_ar:"بيض مسلوق", name_en:"Hard Boiled Egg", type:"food",
-     ingredients:["Protein 6g/egg","Choline","Vitamin D","Healthy Fats"],
-     safety:"safe", sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"غذاء كامل غني بالبروتين والفيتامينات. الكوليسترول في الصفار لا يؤثر على معظم الأشخاص.",
-     desc_en:"Complete food rich in protein and vitamins. Cholesterol in yolk doesn't affect most people."},
-    {id:66, name_ar:"برغر كينج وابر", name_en:"Burger King Whopper", type:"food",
-     ingredients:["Beef Patty","Salt 2.8g","Refined Flour","Gluten","Sugar","Trans Fats"],
-     safety:"danger", sugar:true, caffeine:false, salt:true, lactose:false, penicillin:false, gluten:true, sodium:true,
-     desc_ar:"وجبة سريعة عالية جداً في الصوديوم والدهون المشبعة والسعرات. خطر لمرضى الضغط والسكري.",
-     desc_en:"Fast food very high in sodium, saturated fats, and calories. Dangerous for hypertension and diabetics."},
-    {id:67, name_ar:"بيتزا جاهزة مجمدة", name_en:"Frozen Pizza", type:"food",
-     ingredients:["Refined Flour","Sodium 1.5g/slice","Mozzarella","Processed Meat","Gluten"],
-     safety:"danger", sugar:false, caffeine:false, salt:true, lactose:true, penicillin:false, gluten:true, sodium:true,
-     desc_ar:"صوديوم مرتفع جداً في الشريحة الواحدة. دقيق مكرر ودهون مشبعة. فقيرة غذائياً.",
-     desc_en:"Very high sodium per slice. Refined flour and saturated fats. Nutritionally poor."},
-    {id:68, name_ar:"عصير رمان طبيعي", name_en:"Natural Pomegranate Juice", type:"food",
-     ingredients:["Pomegranate","Polyphenols","Antioxidants","Natural Sugars"],
-     safety:"safe", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"غني جداً بمضادات الأكسدة ويفيد القلب والضغط. سكر طبيعي. يراقبه مرضى السكري.",
-     desc_en:"Very rich in antioxidants, good for heart and blood pressure. Natural sugar. Diabetics monitor intake."},
-    {id:69, name_ar:"ماء جوز الهند", name_en:"Coconut Water", type:"food",
-     ingredients:["Electrolytes","Potassium 600mg","Magnesium","Natural Sugars"],
-     safety:"safe", sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"أفضل مشروب ترطيب طبيعي. غني بالإلكتروليتات. منخفض السعرات. مفيد بعد الرياضة.",
-     desc_en:"Best natural hydration drink. Rich in electrolytes. Low calorie. Beneficial post-workout."},
-    {id:70, name_ar:"لبن رائب (لبنة)", name_en:"Labneh", type:"food",
-     ingredients:["Strained Yogurt","Salt","Lactose","Probiotics"],
-     safety:"warning", sugar:false, caffeine:false, salt:true, lactose:true, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مصدر جيد للبروتين والبروبيوتيك. ملح متوسط. يحتوي لاكتوز. مناسب بكميات معتدلة.",
-     desc_en:"Good protein and probiotic source. Moderate salt. Contains lactose. Suitable in moderation."},
-
-    // More medicines
-    {id:71, name_ar:"سيرتالين 50 (زولوفت)", name_en:"Sertraline 50mg (Zoloft)", type:"med",
-     ingredients:["Sertraline HCl 50mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد اكتئاب SSRI. يحتاج 4-6 أسابيع لكامل التأثير. لا يوقف فجأة. مراقبة طبية ضرورية.",
-     desc_en:"SSRI antidepressant. Needs 4-6 weeks for full effect. Never stop abruptly. Medical monitoring needed."},
-    {id:72, name_ar:"انتيسيد معلق", name_en:"Antacid Suspension", type:"med",
-     ingredients:["Aluminum Hydroxide","Magnesium Hydroxide"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"علاج سريع لحرقة المعدة والحموضة. آمن وبدون وصفة. لا يُستخدم مزمناً.",
-     desc_en:"Fast relief for heartburn and acidity. Safe, OTC medication. Not for chronic use."},
-    {id:73, name_ar:"لوراتادين 10", name_en:"Loratadine 10mg", type:"med",
-     ingredients:["Loratadine 10mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد حساسية لا يسبب النعاس. مناسب أثناء القيادة والعمل. مرة واحدة يومياً.",
-     desc_en:"Non-drowsy antihistamine. Suitable while driving and working. Once daily."},
-    {id:74, name_ar:"بريدنيزولون 5", name_en:"Prednisolone 5mg", type:"med",
-     ingredients:["Prednisolone 5mg"], safety:"danger",
-     sugar:true, caffeine:false, salt:true, lactose:false, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"كورتيكوستيرويد قوي. يرفع السكر والضغط. يضعف المناعة. لا يُوقف مفاجئاً. يُؤخذ صباحاً مع الطعام.",
-     desc_en:"Powerful corticosteroid. Raises blood sugar and pressure. Weakens immunity. Never stop abruptly. Take morning with food."},
-    {id:75, name_ar:"أسبرين 100 (للقلب)", name_en:"Aspirin 100mg Cardio", type:"med",
-     ingredients:["Acetylsalicylic Acid 100mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مميع للدم للوقاية من الجلطات. يزيد خطر النزيف. ممنوع مع مضادات التخثر الأخرى دون استشارة.",
-     desc_en:"Blood thinner for clot prevention. Increases bleeding risk. Avoid with other anticoagulants without consultation."},
-    {id:76, name_ar:"باراسيتامول شراب 250مل", name_en:"Paracetamol Syrup 250ml", type:"med",
-     ingredients:["Paracetamol 120mg/5ml","Sucrose","Sorbitol"], safety:"warning",
-     sugar:true, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"خافض حرارة للأطفال. يحتوي على سكر (سوكروز). الجرعة حسب الوزن. لا تتجاوز الجرعة الموصى بها.",
-     desc_en:"Fever reducer for children. Contains sucrose sugar. Dose based on weight. Don't exceed recommended dose."},
-    {id:77, name_ar:"سيتريزين 10 (زيرتيك)", name_en:"Cetirizine 10mg (Zyrtec)", type:"med",
-     ingredients:["Cetirizine HCl 10mg"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد حساسية فعّال. قد يسبب نعاساً خفيفاً. مرة واحدة مساءً. آمن للاستخدام المزمن.",
-     desc_en:"Effective antihistamine. May cause mild drowsiness. Once nightly. Safe for chronic use."},
-    {id:78, name_ar:"ديكلوفيناك 50 أقراص", name_en:"Diclofenac 50mg Tablets", type:"med",
-     ingredients:["Diclofenac Sodium 50mg"], safety:"warning",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:true,
-     desc_ar:"مضاد التهاب قوي للآلام الحادة. يُؤخذ مع الطعام. يؤثر على المعدة والكلى والقلب عند الإفراط.",
-     desc_en:"Strong anti-inflammatory for acute pain. Take with food. Affects stomach, kidneys, and heart when overused."},
-    {id:79, name_ar:"بانثينول كريم", name_en:"Bepanthen Cream", type:"personal",
-     ingredients:["Dexpanthenol 5%","Lanolin"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"معالج للحروق البسيطة والجروح السطحية. مرطب جلدي فائق. آمن للأطفال والرضع.",
-     desc_en:"Treats minor burns and superficial wounds. Superior skin moisturizer. Safe for babies and children."},
-    {id:80, name_ar:"كلوتريمازول كريم", name_en:"Clotrimazole Cream 1%", type:"med",
-     ingredients:["Clotrimazole 1%"], safety:"safe",
-     sugar:false, caffeine:false, salt:false, lactose:false, penicillin:false, gluten:false, sodium:false,
-     desc_ar:"مضاد فطري موضعي فعّال. للاستخدام الخارجي فقط. يُكمل العلاج كاملاً لمنع الانتكاس.",
-     desc_en:"Effective topical antifungal. External use only. Complete full course to prevent relapse."},
+/* ============================================================
+   DATABASE
+============================================================ */
+const DB=[
+  {id:1,ar:"بنادول أكسترا",en:"Panadol Extra",type:"med",ing:["Paracetamol 500mg","Caffeine 65mg"],safety:"warning",sugar:false,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مسكن وخافض حرارة. يحتوي الكافيين لتعزيز التأثير. غير مناسب لمرضى الكبد.",den:"Pain reliever with caffeine. Not for liver disease."},
+  {id:2,ar:"أوميبرازول 20",en:"Omeprazole 20mg",type:"med",ing:["Omeprazole 20mg"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مثبط لحموضة المعدة. آمن للاستخدام طويل الأمد بإشراف طبي.",den:"Proton pump inhibitor for gastric acidity. Safe long-term."},
+  {id:3,ar:"أوجمنتين 625",en:"Augmentin 625",type:"med",ing:["Amoxicillin 500mg","Clavulanic Acid 125mg"],safety:"danger",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:true,gluten:false,sodium:false,dar:"مضاد حيوي. ممنوع لمن لديهم حساسية من البنسلين. قد يسبب إسهالاً.",den:"Antibiotic. Strictly prohibited for penicillin allergy."},
+  {id:4,ar:"فولتارين جيل",en:"Voltaren Gel",type:"med",ing:["Diclofenac Sodium 1%"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مسكن موضعي لآلام المفاصل. آمن جداً بفضل امتصاصه الضئيل.",den:"Topical pain reliever for joints. Very safe."},
+  {id:5,ar:"بروفين 400",en:"Brufen 400",type:"med",ing:["Ibuprofen 400mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مضاد التهاب ومسكن. يُؤخذ مع الطعام. يؤثر على المعدة عند الإفراط.",den:"Anti-inflammatory. Take with food. May affect stomach."},
+  {id:6,ar:"كلاريتين 10",en:"Claritin 10mg",type:"med",ing:["Loratadine 10mg"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مضاد حساسية لا يسبب النعاس. مناسب لحساسية الأنف والجلد.",den:"Non-drowsy antihistamine. Suitable for nasal and skin allergies."},
+  {id:7,ar:"دايميكرون 80",en:"Diamicron 80mg",type:"med",ing:["Gliclazide 80mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"علاج السكري النوع الثاني. مراقبة السكر مطلوبة.",den:"Type 2 diabetes medication. Blood sugar monitoring required."},
+  {id:8,ar:"كونكور 5",en:"Concor 5mg",type:"med",ing:["Bisoprolol Fumarate 5mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:true,dar:"حاصر بيتا لضغط الدم. لا يُوقف فجأة دون استشارة الطبيب.",den:"Beta blocker for hypertension. Never stop abruptly."},
+  {id:9,ar:"سولبادين",en:"Solpadeine",type:"med",ing:["Paracetamol 500mg","Codeine 8mg","Caffeine 30mg"],safety:"danger",sugar:false,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مسكن قوي بالكوديين. يسبب الإدمان. ممنوع للأطفال والحوامل.",den:"Strong analgesic with codeine. Addictive. Prohibited for children."},
+  {id:10,ar:"فينتولين بخاخ",en:"Ventolin Inhaler",type:"med",ing:["Salbutamol 100mcg/dose"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"موسع الشعب الهوائية لنوبات الربو. سريع المفعول خلال دقائق.",den:"Bronchodilator for asthma attacks. Fast-acting."},
+  {id:11,ar:"أدول 500",en:"Adol 500",type:"med",ing:["Paracetamol 500mg"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"خافض حرارة ومسكن آمن. لا يتجاوز 4 جرام يومياً للبالغين.",den:"Safe antipyretic. Max 4g/day for adults."},
+  {id:12,ar:"جلوكوفاج 500",en:"Glucophage 500",type:"med",ing:["Metformin HCl 500mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"علاج السكري الأول اختياراً. يُعطى مع الطعام.",den:"First-line diabetes treatment. Take with food."},
+  {id:13,ar:"نيكسيوم 20",en:"Nexium 20mg",type:"med",ing:["Esomeprazole 20mg"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مثبط فعّال لحموضة المعدة. يُؤخذ قبل الأكل بـ30 دقيقة.",den:"Effective acid inhibitor. Take 30 min before meals."},
+  {id:14,ar:"ليبيتور 20",en:"Lipitor 20mg",type:"med",ing:["Atorvastatin 20mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"علاج الكوليسترول. قد يسبب آلاماً عضلية نادراً.",den:"Cholesterol medication. Rarely causes muscle pain."},
+  {id:15,ar:"أسبرين 100",en:"Aspirin 100mg Cardio",type:"med",ing:["Acetylsalicylic Acid 100mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مميع للدم للوقاية من الجلطات. يزيد خطر النزيف.",den:"Blood thinner for clot prevention. Increases bleeding risk."},
+  {id:16,ar:"أموكسيسيلين 500",en:"Amoxicillin 500",type:"med",ing:["Amoxicillin 500mg"],safety:"danger",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:true,gluten:false,sodium:false,dar:"مضاد حيوي. ممنوع لمرضى حساسية البنسلين. أكمل الجرعة كاملة.",den:"Antibiotic. Forbidden for penicillin allergy. Complete the full course."},
+  {id:17,ar:"سيرتالين 50",en:"Sertraline 50mg",type:"med",ing:["Sertraline HCl 50mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مضاد اكتئاب. يحتاج 4-6 أسابيع للتأثير. لا يوقف فجأة.",den:"Antidepressant. Needs 4-6 weeks. Never stop abruptly."},
+  {id:18,ar:"كتافاست فوار",en:"Catafast Sachets",type:"med",ing:["Diclofenac Potassium 50mg","Sodium"],safety:"danger",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:true,dar:"مسكن سريع. صوديوم مرتفع — ممنوع لمرضى الضغط.",den:"Fast pain reliever. High sodium — prohibited for hypertension."},
+  {id:19,ar:"بريدنيزولون 5",en:"Prednisolone 5mg",type:"med",ing:["Prednisolone 5mg"],safety:"danger",sugar:true,caffeine:false,salt:true,lactose:false,penicillin:false,gluten:false,sodium:true,dar:"كورتيزون قوي. يرفع السكر والضغط. لا يُوقف مفاجئاً.",den:"Powerful corticosteroid. Raises blood sugar and pressure."},
+  {id:20,ar:"ديكلوفيناك 50",en:"Diclofenac 50mg",type:"med",ing:["Diclofenac Sodium 50mg"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:true,dar:"مضاد التهاب للألم الحاد. يُؤخذ مع الطعام. يؤثر على المعدة.",den:"Strong anti-inflammatory. Take with food."},
+  // FOOD
+  {id:30,ar:"بيبسي كولا 330مل",en:"Pepsi Cola 330ml",type:"food",ing:["Carbonated Water","High Fructose Corn Syrup 41g","Caffeine 38mg"],safety:"danger",sugar:true,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"41جم سكر و38ملغ كافيين في العلبة. ضار جداً لمرضى السكري.",den:"41g sugar, 38mg caffeine per can. Very harmful for diabetics."},
+  {id:31,ar:"ريد بول 250مل",en:"Red Bull 250ml",type:"food",ing:["Caffeine 80mg","Taurine","Sugar 27g"],safety:"danger",sugar:true,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مشروب طاقة عالي الكافيين. ممنوع للأطفال والحوامل ومرضى القلب.",den:"High-caffeine energy drink. Prohibited for children and heart patients."},
+  {id:32,ar:"حليب المراعي",en:"Almarai Full Fat Milk",type:"food",ing:["Whole Milk","Vitamins A & D","Lactose"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:true,penicillin:false,gluten:false,sodium:false,dar:"غني بالكالسيوم. يحتوي لاكتوز طبيعي — تجنبه عند حساسية اللاكتوز.",den:"Rich in calcium. Contains lactose — avoid if intolerant."},
+  {id:33,ar:"بطاطس ليز ملح",en:"Lay's Classic Salted",type:"food",ing:["Potato","Sunflower Oil","Salt 1.6g"],safety:"warning",sugar:false,caffeine:false,salt:true,lactose:false,penicillin:false,gluten:false,sodium:true,dar:"صوديوم مرتفع نسبياً. غير صحي بالكميات الكبيرة لمرضى الضغط.",den:"High sodium. Unhealthy in large amounts for hypertension."},
+  {id:34,ar:"نوتيلا 200جم",en:"Nutella 200g",type:"food",ing:["Sugar 57%","Palm Oil","Hazelnuts","Skim Milk Powder"],safety:"danger",sugar:true,caffeine:false,salt:false,lactose:true,penicillin:false,gluten:false,sodium:false,dar:"57% سكر. خطر على مرضى السكري. يحتوي مشتقات الحليب.",den:"57% sugar. Dangerous for diabetics. Contains milk derivatives."},
+  {id:35,ar:"نسكافيه ذهب",en:"Nescafe Gold",type:"food",ing:["Instant Coffee","Caffeine ~60mg/cup"],safety:"warning",sugar:false,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"كافيين متوسط إلى مرتفع. قد يسبب ارتفاع الضغط والأرق.",den:"Medium to high caffeine. May raise blood pressure."},
+  {id:36,ar:"عصير برتقال المراعي",en:"Almarai Orange Juice",type:"food",ing:["Concentrated Orange Juice","Vitamin C"],safety:"safe",sugar:true,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"سكر طبيعي. مفيد للمناعة. مرضى السكري يحددون الكمية.",den:"Natural fructose. Good for immunity. Diabetics control portions."},
+  {id:37,ar:"شوفان كويكر",en:"Quaker Oats",type:"food",ing:["Whole Grain Oats","Beta-Glucan Fiber"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:true,sodium:false,dar:"غني بالألياف ويخفض الكوليسترول. يحتوي غلوتين طبيعياً.",den:"Fiber-rich, cholesterol-lowering. Contains natural gluten."},
+  {id:38,ar:"كوكاكولا زيرو",en:"Coca Cola Zero 330ml",type:"food",ing:["Carbonated Water","Aspartame","Caffeine 32mg"],safety:"warning",sugar:false,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"خالٍ من السكر لكن فيه كافيين ومحليات صناعية. حمض يضعف الأسنان.",den:"Sugar-free but contains caffeine and sweeteners. Acidic."},
+  {id:39,ar:"حليب صويا",en:"Soy Milk",type:"food",ing:["Soy Extract","Calcium","Vitamins"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"بديل ممتاز للحليب خالٍ من اللاكتوز. مناسب للنباتيين.",den:"Excellent lactose-free milk alternative. Great for vegans."},
+  {id:40,ar:"عسل سدر طبيعي",en:"Natural Sidr Honey",type:"food",ing:["Fructose 38.5%","Glucose 31%","Enzymes","Antioxidants"],safety:"warning",sugar:true,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مفيد طبياً ومضاد حيوي طبيعي. لكنه يرفع السكر. مرضى السكري: جرعة صغيرة.",den:"Natural antibiotic. But raises blood sugar significantly."},
+  {id:41,ar:"خبز حبوب كاملة",en:"Whole Grain Bread",type:"food",ing:["Whole Wheat Flour","Yeast","Salt","Gluten"],safety:"safe",sugar:false,caffeine:false,salt:true,lactose:false,penicillin:false,gluten:true,sodium:false,dar:"غني بالألياف. أفضل من الخبز الأبيض لمرضى السكري. يحتوي غلوتين.",den:"Rich in fiber. Better than white bread for diabetics. Contains gluten."},
+  {id:42,ar:"إندومي خضار",en:"Indomie Vegetables",type:"food",ing:["Wheat Noodles","Salt 1.8g/pack","MSG","Palm Oil"],safety:"danger",sugar:false,caffeine:false,salt:true,lactose:false,penicillin:false,gluten:true,sodium:true,dar:"صوديوم ضار جداً. MSG قد يسبب الصداع. فقير غذائياً.",den:"Very harmful sodium levels. MSG may cause headaches."},
+  {id:43,ar:"شاي أخضر ليبتون",en:"Lipton Green Tea",type:"food",ing:["Green Tea Leaves","Caffeine 20-30mg/cup","Antioxidants"],safety:"safe",sugar:false,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"غني بمضادات الأكسدة. كافيين منخفض. مفيد للقلب والتمثيل الغذائي.",den:"Rich in antioxidants. Low caffeine. Good for heart."},
+  {id:44,ar:"تمر المدينة",en:"Medinah Dates",type:"food",ing:["Fructose 32%","Glucose 24%","Fiber","Potassium"],safety:"warning",sugar:true,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"غني بالمعادن لكن سكره مرتفع. مرضى السكري: 2-3 تمرات فقط.",den:"Rich in minerals but high sugar. Diabetics: max 2-3 dates."},
+  {id:45,ar:"مكسرات بدون ملح",en:"Unsalted Mixed Nuts",type:"food",ing:["Almonds","Cashews","Walnuts","Peanuts"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"دهون صحية وبروتين عالٍ. مفيد للقلب بكميات معتدلة.",den:"Healthy fats and high protein. Good for heart in moderation."},
+  {id:46,ar:"ماء معدني",en:"Mineral Water",type:"food",ing:["Pure Water","Minerals (Ca, Mg, Na)"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"ماء شرب نقي. آمن للجميع. ضروري للترطيب اليومي.",den:"Pure drinking water. Safe for everyone."},
+  {id:47,ar:"خيار طازج",en:"Fresh Cucumber",type:"food",ing:["Water 96%","Fiber","Vitamin K","Potassium"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"خضار ترطيبي منخفض السعرات. مثالي لمرضى السكري والضغط.",den:"Hydrating, low calorie. Ideal for diabetics and hypertension."},
+  {id:48,ar:"موز طازج",en:"Fresh Banana",type:"food",ing:["Potassium 422mg","Vitamin B6","Natural Sugars","Fiber"],safety:"safe",sugar:true,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"غني بالبوتاسيوم. سكر طبيعي. مرضى السكري: حبة واحدة.",den:"Rich in potassium. Natural sugar. Diabetics: one banana limit."},
+  {id:49,ar:"سمك سلمون مشوي",en:"Grilled Salmon",type:"food",ing:["Omega-3 2.2g/100g","Protein 25g","Vitamin D"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"من أفضل الأطعمة لصحة القلب والمخ. أوميغا 3 مرتفع.",den:"One of the best foods for heart and brain. High omega-3."},
+  {id:50,ar:"برغر كينج واتسون",en:"Fast Food Burger",type:"food",ing:["Beef Patty","Salt 2.8g","Refined Flour","Gluten","Trans Fats"],safety:"danger",sugar:true,caffeine:false,salt:true,lactose:false,penicillin:false,gluten:true,sodium:true,dar:"صوديوم مرتفع جداً ودهون مشبعة. خطر لمرضى الضغط والسكري.",den:"Very high sodium and saturated fats. Dangerous for hypertension and diabetics."},
+  {id:51,ar:"شوكولاتة داكنة 85%",en:"Dark Chocolate 85%",type:"food",ing:["Cocoa Mass 85%","Cocoa Butter","Sugar 12%"],safety:"safe",sugar:false,caffeine:true,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"غني بمضادات الأكسدة. سكر منخفض. كافيين خفيف. مفيد للقلب.",den:"Rich in antioxidants. Low sugar. Mild caffeine. Good for heart."},
+  {id:52,ar:"زيت زيتون بكر",en:"Extra Virgin Olive Oil",type:"food",ing:["Oleic Acid 73%","Polyphenols","Vitamin E"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"من أفضل الدهون الصحية. مفيد للقلب. الأفضل للاستخدام بارداً.",den:"One of the healthiest fats. Excellent for heart."},
+  {id:53,ar:"بيض مسلوق",en:"Hard Boiled Egg",type:"food",ing:["Protein 6g/egg","Choline","Vitamin D"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"غذاء كامل غني بالبروتين والفيتامينات. آمن لمعظم الناس.",den:"Complete food rich in protein and vitamins. Safe for most people."},
+  // SUPPLEMENTS
+  {id:60,ar:"فيتامين سي 1000 فوار",en:"Vitamin C 1000 Effervescent",type:"supplement",ing:["Ascorbic Acid 1000mg","Sodium Bicarbonate"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:true,dar:"مقوي للمناعة. الشكل الفوار يحتوي صوديوم مرتفع.",den:"Immunity booster. Effervescent form high in sodium."},
+  {id:61,ar:"زنك 10",en:"Zinc 10mg",type:"supplement",ing:["Zinc Gluconate 10mg"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مكمل الزنك لدعم المناعة. لا يؤخذ على معدة فارغة.",den:"Zinc supplement for immunity. Don't take on empty stomach."},
+  {id:62,ar:"أوميغا 3",en:"Omega-3 Fish Oil",type:"supplement",ing:["EPA 360mg","DHA 240mg"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مفيد لصحة القلب والمخ. الجرعات العالية تزيد سيولة الدم.",den:"Beneficial for heart and brain. High doses may thin blood."},
+  {id:63,ar:"ميلاتونين 5",en:"Melatonin 5mg",type:"supplement",ing:["Melatonin 5mg"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"منظم النوم. يُؤخذ قبل النوم بـ30 دقيقة. غير مُدمن.",den:"Sleep regulator. Take 30 min before bed. Non-addictive."},
+  {id:64,ar:"كالسيوم + فيتامين د",en:"Calcium + Vitamin D",type:"supplement",ing:["Calcium Carbonate 500mg","Vitamin D3 400IU"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"لصحة العظام. يُؤخذ مع وجبة. تجنب مع بعض المضادات الحيوية.",den:"For bone health. Take with meal."},
+  {id:65,ar:"بروتين واي",en:"Whey Protein",type:"supplement",ing:["Whey Protein Concentrate","Lactose"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:true,penicillin:false,gluten:false,sodium:false,dar:"مصدر بروتين ممتاز للرياضيين. يحتوي لاكتوز.",den:"Excellent protein for athletes. Contains lactose."},
+  {id:66,ar:"كرياتين",en:"Creatine Monohydrate",type:"supplement",ing:["Creatine Monohydrate 5g"],safety:"warning",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مكمل رياضي فعّال. يزيد احتباس الماء. اشرب ماءً وفيراً.",den:"Effective sports supplement. Increases water retention. Drink plenty of water."},
+  // PERSONAL CARE
+  {id:70,ar:"فازلين جيل أصلي",en:"Vaseline Original Jelly",type:"personal",ing:["White Petrolatum 100%"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مرطب جلدي آمن وفعّال. لا يسبب حساسية. مناسب لجميع أنواع البشرة.",den:"Safe and effective skin moisturizer. Non-allergenic."},
+  {id:71,ar:"شامبو هيد آند شولدرز",en:"Head & Shoulders Shampoo",type:"personal",ing:["Zinc Pyrithione 1%","SLS","Conditioners"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"فعّال لعلاج القشرة وفروة الرأس الدهنية. للاستخدام الخارجي.",den:"Effective for dandruff. External use only."},
+  {id:72,ar:"كريم نيفيا للجسم",en:"NIVEA Body Cream",type:"personal",ing:["Glycerin","Mineral Oil","Panthenol","Fragrance"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مرطب مكثف للجلد الجاف. العطر قد يسبب حساسية لبعض الأشخاص.",den:"Intensive moisturizer for dry skin. Fragrance may irritate."},
+  {id:73,ar:"بيتادين مطهر",en:"Betadine Antiseptic",type:"personal",ing:["Povidone-iodine 10%"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"مطهر خارجي للجروح. لا يُستخدم داخلياً. قد يصبغ الجلد باللون البني.",den:"External antiseptic for wounds. Not for internal use."},
+  {id:74,ar:"بانثينول كريم",en:"Bepanthen Cream",type:"personal",ing:["Dexpanthenol 5%","Lanolin"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"لعلاج الحروق البسيطة والجروح. آمن للأطفال والرضع.",den:"For minor burns and wounds. Safe for babies."},
+  {id:75,ar:"معجون أسنان كولجيت",en:"Colgate Total Toothpaste",type:"personal",ing:["Fluoride 1450ppm","SLS","Glycerin"],safety:"safe",sugar:false,caffeine:false,salt:false,lactose:false,penicillin:false,gluten:false,sodium:false,dar:"حماية كاملة للأسنان. لا يُبلع. الفلورايد ضار إذا ابتلعه الأطفال.",den:"Complete tooth protection. Do not swallow."},
 ];
 
-// ============================================================
-// STATE
-// ============================================================
-let currentLang = 'ar';
-let userProfile = null;
-let scanHistory = [];
-let activeFilter = 'all';
-let selectedAllergies = [];
-let userGender = 'male';
-
-// ============================================================
-// TRANSLATIONS
-// ============================================================
-const T = {
-    ar: {
-        navLogo:"واعي", navSub:"نظام الهوية الصحية", langBtn:"English",
-        menuHome:"الرئيسية", menuScan:"الفحص", menuProfile:"ملفي الصحي", menuAbout:"عن التطبيق",
-        heroBadge:"ذكاء اصطناعي",
-        welcomeTitle:"مرحباً بك في واعي", welcomeDesc:"نظامك الذكي لفحص المنتجات والأدوية والأغذية بناءً على هويتك الصحية الشخصية.",
-        statProducts:"منتج وغذاء", statMeds:"دواء ومستحضر", statAllergies:"أنواع حساسية",
-        feat1:"هوية صحية شخصية", feat2:"فحص فوري دقيق", feat3:"تنبيهات ذكية",
-        btnStart:"ابدأ الفحص الآن",
-        idTitle:"الهوية الصحية المعلوماتية", idSub:"أدخل بياناتك لتخصيص تجربة الفحص",
-        lblName:"الاسم الكامل", phName:"مثال: محمد علي",
-        lblAge:"العمر", lblBlood:"فصيلة الدم", lblGender:"الجنس",
-        genderMale:"ذكر", genderFemale:"أنثى",
-        lblAllergy:"الحساسية والحالات الصحية", allergyHint:"اختر كل ما ينطبق عليك (يمكن اختيار أكثر من واحد)",
-        aSugar:"سكري", aCaffeine:"حساسية كافيين", aPenicillin:"حساسية بنسلين",
-        aLactose:"عدم تحمل لاكتوز", aSodium:"ضغط دم مرتفع", aGluten:"حساسية غلوتين",
-        lblWeight:"الوزن (كجم)", lblHeight:"الطول (سم)", optional:"(اختياري)", optional2:"(اختياري)",
-        btnSave:"حفظ ومتابعة للفحص",
-        scannerStatus:"جاهز للفحص", scannerHint:"اكتب اسم المنتج أدناه للبحث الفوري",
-        phSearch:"ابحث عن منتج، دواء، غذاء...",
-        fAll:"الكل", fMed:"أدوية", fFood:"أغذية", fSupp:"مكملات", fPersonal:"عناية شخصية",
-        searchEmpty:"ابدأ البحث", searchEmptyDesc:"اكتب اسم المنتج بالعربية أو الإنجليزية للبحث الفوري.",
-        btnBack:"فحص منتج آخر",
-        safeLabel:"آمن لك", warningLabel:"تنبيه / انتبه", dangerLabel:"خطر على حالتك",
-        safeDesc:"هذا المنتج مناسب لحالتك الصحية.", warningDesc:"استخدم بحذر واستشر الصيدلاني.", dangerDesc:"هذا المنتج قد يضر بحالتك الصحية الخاصة.",
-        allergyAlert:"⚠️ يحتوي على مادة تسبب لك الحساسية أو تضر بحالتك!",
-        allergyAlertSugar:"⚠️ يحتوي على سكريات مرتفعة — خطر لمرضى السكري!",
-        allergyAlertCaffeine:"⚠️ يحتوي على كافيين — تجنبه لحساسيتك من الكافيين!",
-        allergyAlertSodium:"⚠️ صوديوم مرتفع — ممنوع لمرضى ضغط الدم!",
-        allergyAlertLactose:"⚠️ يحتوي على لاكتوز — تجنبه لعدم تحمل اللاكتوز!",
-        allergyAlertPenicillin:"🚨 يحتوي على بنسلين — خطر شديد لحساسيتك!",
-        allergyAlertGluten:"⚠️ يحتوي على غلوتين — تجنبه لحساسيتك!",
-        descLabel:"الوصف والتحليل:", ingLabel:"المكونات الفعّالة:", flagsLabel:"محتوى المنتج:",
-        flagSugar:"سكريات", flagCaffeine:"كافيين", flagSodium:"صوديوم عالٍ", flagLactose:"لاكتوز", flagPenicillin:"بنسلين", flagGluten:"غلوتين",
-        typeMed:"دواء", typeFood:"غذاء/مشروب", typeSupp:"مكمل غذائي", typePersonal:"عناية شخصية",
-        miniLbl:"المستخدم الحالي",
-        profileTitle:"ملفي الصحي", scanHistoryTitle:"سجل الفحوصات", noHistory:"لم تفحص أي منتج بعد",
-        aboutTitle:"واعي - Waie", aboutVersion:"الإصدار 2.0 | 2025",
-        aboutDesc:"تطبيق ذكي يساعدك على معرفة مدى سلامة المنتجات والأدوية والأغذية بناءً على هويتك الصحية الشخصية.",
-        f1Title:"هوية صحية مخصصة", f1Desc:"أنشئ ملفاً صحياً شاملاً يتضمن فصيلة الدم والحساسيات والحالات المزمنة.",
-        f2Title:"قاعدة بيانات شاملة", f2Desc:"أكثر من 80 منتجاً ودواءً وغذاءً مع معلومات دقيقة وموثوقة.",
-        f3Title:"تنبيهات ذكية فورية", f3Desc:"يتحقق التطبيق تلقائياً من توافق المنتج مع حالتك الصحية.",
-        f4Title:"ثنائي اللغة", f4Desc:"يعمل بالكامل باللغتين العربية والإنجليزية.",
-        f5Title:"سجل الفحوصات", f5Desc:"يحتفظ التطبيق بسجل كامل للمنتجات التي فحصتها.",
-        disclaimer:"هذا التطبيق للأغراض المعلوماتية فقط ولا يُغني عن استشارة الطبيب أو الصيدلاني. استشر دائماً متخصصاً في الرعاية الصحية قبل تناول أي دواء.",
-        toastSaved:"✅ تم حفظ هويتك الصحية بنجاح!",
-        toastError:"⚠️ يرجى إكمال البيانات المطلوبة",
-        bmi:"مؤشر كتلة الجسم", bmiNormal:"طبيعي", bmiOver:"زيادة وزن", bmiObese:"سمنة", bmiUnder:"نقص وزن",
-        years:"سنة", kg:"كجم", cm:"سم",
-        editProfile:"تعديل الهوية",
-    },
-    en: {
-        navLogo:"Waie", navSub:"Health Identity System", langBtn:"العربية",
-        menuHome:"Home", menuScan:"Scan", menuProfile:"My Health Profile", menuAbout:"About",
-        heroBadge:"AI Powered",
-        welcomeTitle:"Welcome to Waie", welcomeDesc:"Your smart system for checking products, medicines, and foods based on your personal health identity.",
-        statProducts:"Products & Foods", statMeds:"Medicines", statAllergies:"Allergy Types",
-        feat1:"Personal Health ID", feat2:"Instant Accurate Scan", feat3:"Smart Alerts",
-        btnStart:"Start Scanning Now",
-        idTitle:"Health Information Identity", idSub:"Enter your data to personalize your scanning experience",
-        lblName:"Full Name", phName:"E.g. John Smith",
-        lblAge:"Age", lblBlood:"Blood Type", lblGender:"Gender",
-        genderMale:"Male", genderFemale:"Female",
-        lblAllergy:"Allergies & Health Conditions", allergyHint:"Select all that apply (multiple selections allowed)",
-        aSugar:"Diabetes", aCaffeine:"Caffeine Sensitivity", aPenicillin:"Penicillin Allergy",
-        aLactose:"Lactose Intolerance", aSodium:"High Blood Pressure", aGluten:"Gluten Intolerance",
-        lblWeight:"Weight (kg)", lblHeight:"Height (cm)", optional:"(optional)", optional2:"(optional)",
-        btnSave:"Save & Continue to Scan",
-        scannerStatus:"Ready to Scan", scannerHint:"Type the product name below for instant search",
-        phSearch:"Search for product, medicine, food...",
-        fAll:"All", fMed:"Medicines", fFood:"Foods", fSupp:"Supplements", fPersonal:"Personal Care",
-        searchEmpty:"Start Searching", searchEmptyDesc:"Type product name in Arabic or English for instant search.",
-        btnBack:"Scan Another Product",
-        safeLabel:"Safe for You", warningLabel:"Warning / Caution", dangerLabel:"Danger for Your Condition",
-        safeDesc:"This product is suitable for your health condition.", warningDesc:"Use with caution and consult pharmacist.", dangerDesc:"This product may harm your specific health condition.",
-        allergyAlert:"⚠️ Contains a substance you are allergic to or harmful to your condition!",
-        allergyAlertSugar:"⚠️ High sugar content — dangerous for diabetics!",
-        allergyAlertCaffeine:"⚠️ Contains caffeine — avoid due to your caffeine sensitivity!",
-        allergyAlertSodium:"⚠️ High sodium — prohibited for hypertension patients!",
-        allergyAlertLactose:"⚠️ Contains lactose — avoid due to lactose intolerance!",
-        allergyAlertPenicillin:"🚨 Contains penicillin — severe risk for your allergy!",
-        allergyAlertGluten:"⚠️ Contains gluten — avoid due to your gluten intolerance!",
-        descLabel:"Description & Analysis:", ingLabel:"Active Ingredients:", flagsLabel:"Product Content:",
-        flagSugar:"Sugars", flagCaffeine:"Caffeine", flagSodium:"High Sodium", flagLactose:"Lactose", flagPenicillin:"Penicillin", flagGluten:"Gluten",
-        typeMed:"Medicine", typeFood:"Food / Beverage", typeSupp:"Supplement", typePersonal:"Personal Care",
-        miniLbl:"Current User",
-        profileTitle:"My Health Profile", scanHistoryTitle:"Scan History", noHistory:"No products scanned yet",
-        aboutTitle:"Waie - واعي", aboutVersion:"Version 2.0 | 2025",
-        aboutDesc:"A smart application that helps you determine the safety of products, medicines, and foods based on your personal health identity.",
-        f1Title:"Personalized Health ID", f1Desc:"Create a comprehensive health profile including blood type, allergies, and chronic conditions.",
-        f2Title:"Comprehensive Database", f2Desc:"Over 80 products and medicines with accurate and reliable information.",
-        f3Title:"Instant Smart Alerts", f3Desc:"The app automatically checks product compatibility with your health condition.",
-        f4Title:"Bilingual", f4Desc:"Works fully in both Arabic and English with RTL and LTR support.",
-        f5Title:"Scan History", f5Desc:"The app keeps a complete record of products you've previously scanned.",
-        disclaimer:"This app is for informational purposes only and does not replace consultation with a doctor or pharmacist. Always consult a healthcare professional before taking any medication.",
-        toastSaved:"✅ Health identity saved successfully!",
-        toastError:"⚠️ Please complete the required fields",
-        bmi:"BMI", bmiNormal:"Normal", bmiOver:"Overweight", bmiObese:"Obese", bmiUnder:"Underweight",
-        years:"y/o", kg:"kg", cm:"cm",
-        editProfile:"Edit Profile",
-    }
+/* ============================================================
+   TRANSLATIONS
+============================================================ */
+const L={
+  ar:{
+    navLogo:"واعي",navSub:"نظام الهوية الصحية",langBtn:"English",
+    menuHome:"الرئيسية",menuScan:"الفحص",menuProfile:"ملفي الصحي",menuAbout:"عن التطبيق",
+    heroBadge:"ذكاء اصطناعي",
+    welcomeTitle:"مرحباً بك في واعي",welcomeDesc:"نظامك الذكي لفحص المنتجات والأدوية والأغذية بناءً على هويتك الصحية الشخصية.",
+    statProducts:"منتج وغذاء",statMeds:"دواء ومستحضر",statAllergies:"أنواع حساسية",
+    feat1:"هوية صحية شخصية",feat2:"فحص فوري دقيق",feat3:"تنبيهات ذكية",
+    btnStart:"ابدأ الفحص الآن",
+    idTitle:"الهوية الصحية المعلوماتية",idSub:"أدخل بياناتك لتخصيص تجربة الفحص",
+    lblName:"الاسم الكامل",phName:"مثال: محمد علي",
+    lblAge:"العمر",lblBlood:"فصيلة الدم",lblGender:"الجنس",
+    gMale:"ذكر",gFemale:"أنثى",
+    lblAllergy:"الحساسية والحالات الصحية",allergyHint2:"(اختياري، اختر كل ما ينطبق)",
+    aSugar:"سكري",aCaffeine:"حساسية كافيين",aPenicillin:"حساسية بنسلين",
+    aLactose:"عدم تحمل لاكتوز",aSodium:"ضغط دم مرتفع",aGluten:"حساسية غلوتين",
+    lblWeight:"الوزن",optKg:"(كجم، اختياري)",lblHeight:"الطول",optCm:"(سم، اختياري)",
+    btnSave:"حفظ ومتابعة للفحص",
+    scanStatus:"جاهز للفحص",scanHint:"اكتب اسم المنتج أدناه للبحث الفوري",
+    phSearch:"ابحث عن منتج، دواء، غذاء...",
+    fAll:"الكل",fMed:"أدوية",fFood:"أغذية",fSupp:"مكملات",fPersonal:"عناية شخصية",
+    searchEmpty:"ابدأ البحث",searchEmptyDesc:"اكتب اسم المنتج بالعربية أو الإنجليزية.",
+    btnBack:"فحص منتج آخر",
+    safeLabel:"آمن لك",warningLabel:"تنبيه / انتبه",dangerLabel:"خطر على حالتك",
+    safeDesc:"هذا المنتج مناسب لحالتك الصحية.",warningDesc:"استخدم بحذر واستشر الصيدلاني.",dangerDesc:"هذا المنتج قد يضر بحالتك الصحية.",
+    alertSugar:"⚠️ يحتوي سكريات مرتفعة — خطر لمرضى السكري!",
+    alertCaffeine:"⚠️ يحتوي كافيين — تجنبه لحساسيتك!",
+    alertPenicillin:"🚨 يحتوي بنسلين — خطر شديد على حالتك!",
+    alertLactose:"⚠️ يحتوي لاكتوز — تجنبه لعدم تحمل اللاكتوز!",
+    alertSodium:"🚨 صوديوم مرتفع — ممنوع لمرضى ضغط الدم!",
+    alertGluten:"⚠️ يحتوي غلوتين — تجنبه لحساسيتك!",
+    descLbl:"الوصف والتحليل:",ingLbl:"المكونات الفعّالة:",flagsLbl:"محتوى المنتج:",
+    flSugar:"سكريات",flCaffeine:"كافيين",flSodium:"صوديوم مرتفع",flLactose:"لاكتوز",flPenicillin:"بنسلين",flGluten:"غلوتين",
+    tMed:"دواء",tFood:"غذاء",tSupplement:"مكمل غذائي",tPersonal:"عناية شخصية",
+    genderMale:"ذكر",genderFemale:"أنثى",
+    scanHistoryTitle:"سجل الفحوصات",noHistory:"لم تفحص أي منتج بعد",
+    editProfile:"تعديل الهوية الصحية",
+    bmi:"مؤشر كتلة الجسم",bmiNormal:"طبيعي",bmiOver:"زيادة وزن",bmiObese:"سمنة",bmiUnder:"نقص وزن",
+    years:"سنة",kg:"كجم",cm:"سم",
+    aboutTitle:"واعي - Waie",aboutVersion:"الإصدار 2.0 | 2025",aboutDesc:"تطبيق ذكي لمعرفة مدى سلامة المنتجات.",
+    f1Title:"هوية صحية مخصصة",f1Desc:"أنشئ ملفاً صحياً شاملاً.",
+    f2Title:"قاعدة بيانات شاملة",f2Desc:"أكثر من 80 منتجاً مع معلومات دقيقة.",
+    f3Title:"تنبيهات ذكية فورية",f3Desc:"يتحقق تلقائياً من توافق المنتج مع حالتك.",
+    f4Title:"ثنائي اللغة",f4Desc:"يعمل بالكامل بالعربية والإنجليزية.",
+    f5Title:"سجل الفحوصات",f5Desc:"سجل كامل للمنتجات التي فحصتها.",
+    disclaimer:"هذا التطبيق للأغراض المعلوماتية فقط ولا يُغني عن استشارة الطبيب.",
+    toastSaved:"✅ تم حفظ هويتك الصحية بنجاح!",
+    toastError:"⚠️ يرجى إدخال الاسم والعمر",
+    noAllergy:"لا توجد حساسية",none:"لا يوجد",
+    allergiesTitle:"الحساسيات والحالات الصحية",
+  },
+  en:{
+    navLogo:"Waie",navSub:"Health Identity System",langBtn:"العربية",
+    menuHome:"Home",menuScan:"Scan",menuProfile:"My Profile",menuAbout:"About",
+    heroBadge:"AI Powered",
+    welcomeTitle:"Welcome to Waie",welcomeDesc:"Your smart system for checking products, medicines, and foods based on your personal health identity.",
+    statProducts:"Products & Foods",statMeds:"Medicines",statAllergies:"Allergy Types",
+    feat1:"Personal Health ID",feat2:"Instant Accurate Scan",feat3:"Smart Alerts",
+    btnStart:"Start Scanning Now",
+    idTitle:"Health Information Identity",idSub:"Enter your data to personalize scanning",
+    lblName:"Full Name",phName:"E.g. John Smith",
+    lblAge:"Age",lblBlood:"Blood Type",lblGender:"Gender",
+    gMale:"Male",gFemale:"Female",
+    lblAllergy:"Allergies & Health Conditions",allergyHint2:"(optional, select all that apply)",
+    aSugar:"Diabetes",aCaffeine:"Caffeine Sensitivity",aPenicillin:"Penicillin Allergy",
+    aLactose:"Lactose Intolerance",aSodium:"High Blood Pressure",aGluten:"Gluten Intolerance",
+    lblWeight:"Weight",optKg:"(kg, optional)",lblHeight:"Height",optCm:"(cm, optional)",
+    btnSave:"Save & Continue to Scan",
+    scanStatus:"Ready to Scan",scanHint:"Type product name below for instant search",
+    phSearch:"Search for product, medicine, food...",
+    fAll:"All",fMed:"Medicines",fFood:"Foods",fSupp:"Supplements",fPersonal:"Personal Care",
+    searchEmpty:"Start Searching",searchEmptyDesc:"Type product name in Arabic or English.",
+    btnBack:"Scan Another Product",
+    safeLabel:"Safe for You",warningLabel:"Warning / Caution",dangerLabel:"Danger for Your Condition",
+    safeDesc:"This product is suitable for your health condition.",warningDesc:"Use with caution and consult pharmacist.",dangerDesc:"This product may harm your health condition.",
+    alertSugar:"⚠️ High sugar content — dangerous for diabetics!",
+    alertCaffeine:"⚠️ Contains caffeine — avoid due to your sensitivity!",
+    alertPenicillin:"🚨 Contains penicillin — severe risk for your allergy!",
+    alertLactose:"⚠️ Contains lactose — avoid due to intolerance!",
+    alertSodium:"🚨 High sodium — prohibited for hypertension!",
+    alertGluten:"⚠️ Contains gluten — avoid due to your intolerance!",
+    descLbl:"Description & Analysis:",ingLbl:"Active Ingredients:",flagsLbl:"Product Content:",
+    flSugar:"Sugars",flCaffeine:"Caffeine",flSodium:"High Sodium",flLactose:"Lactose",flPenicillin:"Penicillin",flGluten:"Gluten",
+    tMed:"Medicine",tFood:"Food",tSupplement:"Supplement",tPersonal:"Personal Care",
+    genderMale:"Male",genderFemale:"Female",
+    scanHistoryTitle:"Scan History",noHistory:"No products scanned yet",
+    editProfile:"Edit Health Profile",
+    bmi:"BMI",bmiNormal:"Normal",bmiOver:"Overweight",bmiObese:"Obese",bmiUnder:"Underweight",
+    years:"y/o",kg:"kg",cm:"cm",
+    aboutTitle:"Waie - واعي",aboutVersion:"Version 2.0 | 2025",aboutDesc:"A smart app to check product safety.",
+    f1Title:"Personalized Health ID",f1Desc:"Create a comprehensive health profile.",
+    f2Title:"Comprehensive Database",f2Desc:"Over 80 products with accurate information.",
+    f3Title:"Instant Smart Alerts",f3Desc:"Auto-checks product compatibility.",
+    f4Title:"Bilingual",f4Desc:"Works fully in Arabic and English.",
+    f5Title:"Scan History",f5Desc:"Complete record of scanned products.",
+    disclaimer:"This app is for informational purposes only and does not replace medical advice.",
+    toastSaved:"✅ Health identity saved successfully!",
+    toastError:"⚠️ Please enter your name and age",
+    noAllergy:"No allergies",none:"None",
+    allergiesTitle:"Allergies & Health Conditions",
+  }
 };
 
-function t(key){ return T[currentLang][key] || key; }
+/* ============================================================
+   STATE
+============================================================ */
+let lang='ar';
+let profile=null;
+let history=[];
+let activeFilter='all';
+let allergies=[];
+let gender='male';
 
-// ============================================================
-// UI HELPERS
-// ============================================================
-function showScreen(id){
-    document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
-    const el = document.getElementById(id);
-    el.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-    // Highlight menu
-    ['smWelcome'].forEach(x=>{ const b=document.getElementById(x); if(b) b.classList.remove('active'); });
+/* ============================================================
+   HELPERS
+============================================================ */
+const t=k=>L[lang][k]||k;
+const qs=s=>document.querySelector(s);
+const qsa=s=>document.querySelectorAll(s);
+
+function toast(msg,type='success',dur=3000){
+  const w=document.getElementById('toastWrap');
+  const d=document.createElement('div');
+  d.className=`toast ${type}`;
+  const ico={success:'fa-check-circle',error:'fa-times-circle',info:'fa-info-circle'};
+  d.innerHTML=`<i class="fas ${ico[type]||'fa-info-circle'}"></i>${msg}`;
+  w.appendChild(d);
+  setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .4s';setTimeout(()=>d.remove(),400);},dur);
 }
 
-function navTo(screenId){
-    if(screenId==='screen-scanner' && !userProfile){ showScreen('screen-identity'); return; }
-    if(screenId==='screen-profile' && !userProfile){ showScreen('screen-identity'); return; }
-    if(screenId==='screen-profile') renderProfile();
-    showScreen(screenId);
-    applyTranslations();
+/* ============================================================
+   NAVIGATION
+============================================================ */
+function goTo(id){
+  qsa('main section').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function openSideMenu(){
-    document.getElementById('sideMenu').classList.add('open');
-    document.getElementById('sideOverlay').classList.add('open');
-}
-function closeSideMenu(){
-    document.getElementById('sideMenu').classList.remove('open');
-    document.getElementById('sideOverlay').classList.remove('open');
-}
-
-function showToast(msg, type='success', duration=3000){
-    const c = document.getElementById('toastContainer');
-    const div = document.createElement('div');
-    div.className = `toast ${type}`;
-    div.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':type==='error'?'fa-times-circle':'fa-info-circle'}"></i> ${msg}`;
-    c.appendChild(div);
-    setTimeout(()=>{ div.style.opacity='0'; div.style.transition='opacity 0.4s'; setTimeout(()=>div.remove(),400); }, duration);
+function navTo(id){
+  if((id==='screen-scanner'||id==='screen-profile')&&!profile){goTo('screen-identity');return;}
+  if(id==='screen-profile') renderProfile();
+  goTo(id);
+  updateNavLinks(id);
+  applyLang();
 }
 
-// ============================================================
-// LANGUAGE
-// ============================================================
-function toggleLanguage(){
-    currentLang = currentLang === 'ar' ? 'en' : 'ar';
-    document.body.className = currentLang === 'en' ? 'en' : '';
-    document.getElementById('html-root').setAttribute('lang', currentLang);
-    document.getElementById('html-root').setAttribute('dir', currentLang==='ar'?'rtl':'ltr');
-    applyTranslations();
-    if(userProfile) updateMiniProfile();
-    const activeSection = document.querySelector('main section.active');
-    if(activeSection?.id === 'screen-profile') renderProfile();
+function updateNavLinks(active){
+  const ids=['nHome','nScan','nProf','dHome','dScan','dProf'];
+  const maps={
+    'screen-welcome':['nHome','dHome'],
+    'screen-scanner':['nScan','dScan'],
+    'screen-profile':['nProf','dProf'],
+  };
+  ids.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
+  const toActive=maps[active]||[];
+  toActive.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('active');});
 }
 
-function applyTranslations(){
-    document.querySelectorAll('[data-key]').forEach(el=>{
-        const k = el.getAttribute('data-key');
-        if(T[currentLang][k]) el.textContent = T[currentLang][k];
-    });
-    document.querySelectorAll('[data-placeholder-key]').forEach(el=>{
-        const k = el.getAttribute('data-placeholder-key');
-        if(T[currentLang][k]) el.placeholder = T[currentLang][k];
-    });
-    document.getElementById('langBtn').textContent = t('langBtn');
-    document.getElementById('smLangBtn').textContent = t('langBtn');
-    document.getElementById('navLogo').textContent = t('navLogo');
-    document.getElementById('smLogo').textContent = t('navLogo');
-    // re-search if open
-    if(document.getElementById('screen-scanner').classList.contains('active')) searchProducts();
+/* ============================================================
+   DRAWER
+============================================================ */
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow='';
 }
 
-// ============================================================
-// GENDER
-// ============================================================
-function selectGender(g){
-    userGender = g;
-    document.getElementById('genderM').classList.toggle('selected', g==='male');
-    document.getElementById('genderF').classList.toggle('selected', g==='female');
+/* ============================================================
+   LANGUAGE
+============================================================ */
+function toggleLang(){
+  lang=lang==='ar'?'en':'ar';
+  const root=document.getElementById('html-root');
+  root.setAttribute('lang',lang);
+  root.setAttribute('dir',lang==='ar'?'rtl':'ltr');
+  document.body.className=lang==='en'?'en':'';
+  // fix back arrow direction
+  const bi=document.getElementById('backIcon');
+  if(bi) bi.className=lang==='ar'?'fas fa-arrow-right':'fas fa-arrow-left';
+  applyLang();
+  if(profile) updateMiniBar();
+  const active=qs('main section.active');
+  if(active?.id==='screen-profile') renderProfile();
 }
 
-// ============================================================
-// ALLERGIES
-// ============================================================
-function toggleAllergy(type){
-    const chips = document.querySelectorAll('#allergyChips .allergy-chip');
-    const allergyMap = ['sugar','caffeine','penicillin','lactose','sodium','gluten'];
-    const idx = allergyMap.indexOf(type);
-    const chip = chips[idx];
-    if(selectedAllergies.includes(type)){
-        selectedAllergies = selectedAllergies.filter(a=>a!==type);
-        chip.classList.remove('selected');
-    } else {
-        selectedAllergies.push(type);
-        chip.classList.add('selected');
-    }
+function applyLang(){
+  qsa('[data-k]').forEach(el=>{
+    const k=el.getAttribute('data-k');
+    if(L[lang][k]) el.textContent=L[lang][k];
+  });
+  qsa('[data-phk]').forEach(el=>{
+    const k=el.getAttribute('data-phk');
+    if(L[lang][k]) el.placeholder=L[lang][k];
+  });
+  document.getElementById('langBtn').textContent=t('langBtn');
+  document.getElementById('dLangBtn').textContent=t('langBtn');
+  document.getElementById('navLogo').textContent=t('navLogo');
+  document.getElementById('dLogo').textContent=t('navLogo');
+  // re-render search if open
+  if(qs('#screen-scanner.active')) doSearch();
 }
 
-// ============================================================
-// SAVE IDENTITY
-// ============================================================
-function saveIdentity(){
-    const name = document.getElementById('userName').value.trim();
-    const age = parseInt(document.getElementById('userAge').value);
-    const blood = document.getElementById('userBlood').value;
-    const weight = document.getElementById('userWeight').value;
-    const height = document.getElementById('userHeight').value;
-
-    if(!name || !age || age<1 || age>120){
-        showToast(t('toastError'), 'error');
-        return;
-    }
-
-    userProfile = { name, age, blood, gender:userGender, allergies:[...selectedAllergies], weight:weight||null, height:height||null };
-    updateMiniProfile();
-    document.getElementById('miniProfileBar').classList.add('visible');
-    document.getElementById('dnScanner').style.display='flex';
-    document.getElementById('dnProfile').style.display='flex';
-    document.getElementById('smScanner').style.display='flex';
-    document.getElementById('smProfile').style.display='flex';
-    showToast(t('toastSaved'), 'success');
-    showScreen('screen-scanner');
+/* ============================================================
+   GENDER & ALLERGIES
+============================================================ */
+function selGender(g){
+  gender=g;
+  document.getElementById('gM').classList.toggle('sel',g==='male');
+  document.getElementById('gF').classList.toggle('sel',g==='female');
 }
 
-function updateMiniProfile(){
-    document.getElementById('miniName').textContent = userProfile.name;
-    document.getElementById('miniSub').textContent = userProfile.age + ' ' + t('years') + ' • ' + userProfile.blood;
-    document.getElementById('miniBlood').textContent = userProfile.blood;
-    const allergyText = userProfile.allergies.length > 0
-        ? userProfile.allergies.map(a=>T[currentLang]['a'+a.charAt(0).toUpperCase()+a.slice(1)]||a).join(', ')
-        : (currentLang==='ar'?'لا يوجد':'None');
-    document.getElementById('miniAllergy').textContent = allergyText;
+function toggleAllergy(btn,type){
+  if(allergies.includes(type)){
+    allergies=allergies.filter(a=>a!==type);
+    btn.classList.remove('sel');
+  }else{
+    allergies.push(type);
+    btn.classList.add('sel');
+  }
 }
 
-// ============================================================
-// FILTER
-// ============================================================
-function setFilter(f, btn){
-    activeFilter = f;
-    document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    searchProducts();
+/* ============================================================
+   SAVE PROFILE
+============================================================ */
+function saveProfile(){
+  const name=document.getElementById('fName').value.trim();
+  const age=parseInt(document.getElementById('fAge').value);
+  if(!name||!age||age<1||age>120){toast(t('toastError'),'error');return;}
+  profile={
+    name,age,
+    blood:document.getElementById('fBlood').value,
+    gender,allergies:[...allergies],
+    weight:document.getElementById('fWeight').value||null,
+    height:document.getElementById('fHeight').value||null,
+  };
+  updateMiniBar();
+  document.getElementById('miniBar').classList.add('show');
+  ['nScan','nProf','dScan','dProf'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='flex';
+  });
+  toast(t('toastSaved'),'success');
+  navTo('screen-scanner');
 }
 
-// ============================================================
-// SEARCH
-// ============================================================
-function searchProducts(){
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
-    const resultsDiv = document.getElementById('searchResults');
-
-    let filtered = products;
-    if(activeFilter !== 'all') filtered = filtered.filter(p=>p.type===activeFilter);
-    if(query.length >= 1){
-        filtered = filtered.filter(p=>
-            p.name_ar.includes(query) || p.name_en.toLowerCase().includes(query) ||
-            p.ingredients.some(i=>i.toLowerCase().includes(query))
-        );
-    } else if(query.length === 0) {
-        resultsDiv.innerHTML = `<div class="empty-state"><i class="fas fa-search"></i><h4>${t('searchEmpty')}</h4><p>${t('searchEmptyDesc')}</p></div>`;
-        return;
-    }
-
-    if(filtered.length === 0){
-        resultsDiv.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h4>${currentLang==='ar'?'لا توجد نتائج':'No results'}</h4><p>${currentLang==='ar'?'جرب كلمة بحث أخرى':'Try a different search term'}</p></div>`;
-        return;
-    }
-
-    const typeIcons = { med:'fa-pills', food:'fa-apple-alt', supplement:'fa-capsules', personal:'fa-spa' };
-    resultsDiv.innerHTML = filtered.slice(0,15).map(p=>{
-        const safetyClass = getSafetyForUser(p);
-        return `<div class="result-item" onclick="showResult(${p.id})">
-            <div class="result-item-icon ${p.type}"><i class="fas ${typeIcons[p.type]||'fa-box'}"></i></div>
-            <div class="result-item-info">
-                <div class="result-item-name">${currentLang==='ar'?p.name_ar:p.name_en}</div>
-                <div class="result-item-type">${t('type'+p.type.charAt(0).toUpperCase()+p.type.slice(1))}</div>
-            </div>
-            <div class="result-item-safety safety-${safetyClass}"></div>
-        </div>`;
-    }).join('');
+function updateMiniBar(){
+  document.getElementById('mbName').textContent=profile.name;
+  document.getElementById('mbSub').textContent=`${profile.age} ${t('years')} • ${profile.blood}`;
+  document.getElementById('mbBlood').textContent=profile.blood;
+  const al=profile.allergies.length>0
+    ?profile.allergies.map(a=>t('a'+a.charAt(0).toUpperCase()+a.slice(1))).join(', ')
+    :t('none');
+  document.getElementById('mbAllergy').textContent=al;
 }
 
-// ============================================================
-// SAFETY LOGIC
-// ============================================================
-function getSafetyForUser(product){
-    if(!userProfile) return product.safety;
-    let finalSafety = product.safety;
-    const allergies = userProfile.allergies;
-    const checks = ['sugar','caffeine','penicillin','lactose','sodium','gluten'];
-    for(const a of allergies){
-        if(checks.includes(a) && product[a]){
-            if(a==='penicillin') return 'danger';
-            if(finalSafety==='safe') finalSafety='warning';
-            if(product.safety==='danger') finalSafety='danger';
-            if(a==='sugar' && product.safety!=='safe') finalSafety='danger';
-            if(a==='sodium' && product[a]) finalSafety = finalSafety==='safe'?'warning':'danger';
-            if(a==='caffeine' && product.caffeine && finalSafety==='safe') finalSafety='warning';
-        }
-    }
-    return finalSafety;
+/* ============================================================
+   SEARCH & FILTER
+============================================================ */
+function setFilter(f,btn){
+  activeFilter=f;
+  qsa('.filter-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  doSearch();
 }
 
-function getAlerts(product){
-    if(!userProfile) return [];
-    const alerts = [];
-    const allergies = userProfile.allergies;
-    if(allergies.includes('sugar') && product.sugar) alerts.push({msg:t('allergyAlertSugar'), type:'danger'});
-    if(allergies.includes('caffeine') && product.caffeine) alerts.push({msg:t('allergyAlertCaffeine'), type:'warning'});
-    if(allergies.includes('penicillin') && product.penicillin) alerts.push({msg:t('allergyAlertPenicillin'), type:'danger'});
-    if(allergies.includes('lactose') && product.lactose) alerts.push({msg:t('allergyAlertLactose'), type:'warning'});
-    if(allergies.includes('sodium') && (product.sodium||product.salt)) alerts.push({msg:t('allergyAlertSodium'), type:'danger'});
-    if(allergies.includes('gluten') && product.gluten) alerts.push({msg:t('allergyAlertGluten'), type:'warning'});
-    return alerts;
+function doSearch(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  const div=document.getElementById('searchResults');
+
+  let res=DB;
+  if(activeFilter!=='all') res=res.filter(p=>p.type===activeFilter);
+  if(q.length>0){
+    res=res.filter(p=>
+      p.ar.includes(q)||p.en.toLowerCase().includes(q)||
+      p.ing.some(i=>i.toLowerCase().includes(q))
+    );
+  }else{
+    div.innerHTML=`<div class="empty-state"><i class="fas fa-search"></i><h4>${t('searchEmpty')}</h4><p>${t('searchEmptyDesc')}</p></div>`;
+    return;
+  }
+
+  if(!res.length){
+    div.innerHTML=`<div class="empty-state"><i class="fas fa-box-open"></i><h4>${lang==='ar'?'لا توجد نتائج':'No results'}</h4><p>${lang==='ar'?'جرب كلمة بحث أخرى':'Try a different search term'}</p></div>`;
+    return;
+  }
+
+  const icons={med:'fa-pills',food:'fa-apple-alt',supplement:'fa-capsules',personal:'fa-spa'};
+  div.innerHTML=res.slice(0,15).map(p=>{
+    const s=getSafety(p);
+    const nm=lang==='ar'?p.ar:p.en;
+    const tp=t('t'+p.type.charAt(0).toUpperCase()+p.type.slice(1));
+    return `<div class="result-item" onclick="showResult(${p.id})">
+      <div class="ri-icon ${p.type}"><i class="fas ${icons[p.type]||'fa-box'}"></i></div>
+      <div class="ri-info">
+        <div class="ri-name">${nm}</div>
+        <div class="ri-type">${tp}</div>
+      </div>
+      <div class="ri-dot ${s}"></div>
+    </div>`;
+  }).join('');
 }
 
-// ============================================================
-// SHOW RESULT
-// ============================================================
-function showResult(productId){
-    const product = products.find(p=>p.id===productId);
-    if(!product) return;
-
-    const finalSafety = getSafetyForUser(product);
-    const alerts = getAlerts(product);
-
-    scanHistory.unshift({ id:productId, name: currentLang==='ar'?product.name_ar:product.name_en, safety:finalSafety, time: new Date().toLocaleTimeString(currentLang==='ar'?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit'}) });
-    if(scanHistory.length > 10) scanHistory.pop();
-
-    const typeIcons = { med:'fa-pills', food:'fa-apple-alt', supplement:'fa-capsules', personal:'fa-spa' };
-    const safetyConfig = {
-        safe:{ icon:'fa-check-circle', label:t('safeLabel'), desc:t('safeDesc') },
-        warning:{ icon:'fa-exclamation-triangle', label:t('warningLabel'), desc:t('warningDesc') },
-        danger:{ icon:'fa-times-circle', label:t('dangerLabel'), desc:t('dangerDesc') },
-    };
-    const cfg = safetyConfig[finalSafety];
-
-    const flags = [
-        { key:'sugar', label:t('flagSugar'), has: product.sugar },
-        { key:'caffeine', label:t('flagCaffeine'), has: product.caffeine },
-        { key:'sodium', label:t('flagSodium'), has: product.salt||product.sodium },
-        { key:'lactose', label:t('flagLactose'), has: product.lactose },
-        { key:'penicillin', label:t('flagPenicillin'), has: product.penicillin },
-        { key:'gluten', label:t('flagGluten'), has: product.gluten },
-    ];
-
-    const flagsHtml = flags.map(f=>{
-        const isHarmful = userProfile && userProfile.allergies.includes(f.key) && f.has;
-        const cls = isHarmful ? 'has' : f.has ? 'has-warn' : '';
-        return `<div class="flag-item ${cls}"><div class="flag-dot"></div><span>${f.label}</span></div>`;
-    }).join('');
-
-    document.getElementById('resultContent').innerHTML = `
-        <div class="result-header-card">
-            <div class="result-product-row">
-                <div class="result-product-icon ${product.type}" style="background:${product.type==='med'?'#eff6ff':product.type==='food'?'#fef3c7':product.type==='supplement'?'#f0fdf4':'#fdf4ff'}">
-                    <i class="fas ${typeIcons[product.type]||'fa-box'}" style="color:${product.type==='med'?'#3b82f6':product.type==='food'?'#d97706':product.type==='supplement'?'#16a34a':'#a855f7'}"></i>
-                </div>
-                <div>
-                    <div class="result-product-name">${currentLang==='ar'?product.name_ar:product.name_en}</div>
-                    <div class="result-product-type">${t('type'+product.type.charAt(0).toUpperCase()+product.type.slice(1))}</div>
-                </div>
-            </div>
-
-            <div class="safety-banner ${finalSafety}">
-                <i class="fas ${cfg.icon}"></i>
-                <div class="safety-banner-text">
-                    <strong>${cfg.label}</strong>
-                    <span>${cfg.desc}</span>
-                </div>
-            </div>
-
-            ${alerts.length > 0 ? `<div class="alert-list">${alerts.map(a=>`
-                <div class="alert-item ${a.type}">
-                    <i class="fas fa-bell"></i>
-                    <p>${a.msg}</p>
-                </div>`).join('')}</div>` : ''}
-
-            <div class="info-section">
-                <h4>${t('descLabel')}</h4>
-                <p>${currentLang==='ar'?product.desc_ar:product.desc_en}</p>
-            </div>
-
-            <div class="info-section">
-                <h4>${t('ingLabel')}</h4>
-                <div class="tag-list">${product.ingredients.map(i=>`<span class="tag">${i}</span>`).join('')}</div>
-            </div>
-
-            <div class="info-section">
-                <h4>${t('flagsLabel')}</h4>
-                <div class="flags-grid">${flagsHtml}</div>
-            </div>
-        </div>`;
-
-    showScreen('screen-results');
+/* ============================================================
+   SAFETY LOGIC
+============================================================ */
+function getSafety(p){
+  if(!profile) return p.safety;
+  let s=p.safety;
+  const al=profile.allergies;
+  if(al.includes('penicillin')&&p.penicillin) return 'danger';
+  if(al.includes('sugar')&&p.sugar){ if(p.safety!=='safe') s='danger'; else if(s==='safe') s='warning'; }
+  if(al.includes('sodium')&&(p.sodium||p.salt)){ s=s==='safe'?'warning':'danger'; }
+  if(al.includes('caffeine')&&p.caffeine&&s==='safe') s='warning';
+  if(al.includes('lactose')&&p.lactose&&s==='safe') s='warning';
+  if(al.includes('gluten')&&p.gluten&&s==='safe') s='warning';
+  return s;
 }
 
-// ============================================================
-// PROFILE
-// ============================================================
+function getAlerts(p){
+  if(!profile) return [];
+  const al=profile.allergies, a=[];
+  if(al.includes('sugar')&&p.sugar) a.push({msg:t('alertSugar'),type:'danger'});
+  if(al.includes('caffeine')&&p.caffeine) a.push({msg:t('alertCaffeine'),type:'warning'});
+  if(al.includes('penicillin')&&p.penicillin) a.push({msg:t('alertPenicillin'),type:'danger'});
+  if(al.includes('lactose')&&p.lactose) a.push({msg:t('alertLactose'),type:'warning'});
+  if(al.includes('sodium')&&(p.sodium||p.salt)) a.push({msg:t('alertSodium'),type:'danger'});
+  if(al.includes('gluten')&&p.gluten) a.push({msg:t('alertGluten'),type:'warning'});
+  return a;
+}
+
+/* ============================================================
+   SHOW RESULT
+============================================================ */
+function showResult(id){
+  const p=DB.find(x=>x.id===id);
+  if(!p) return;
+  const s=getSafety(p);
+  const alerts=getAlerts(p);
+  const nm=lang==='ar'?p.ar:p.en;
+  history.unshift({id,name:nm,safety:s,time:new Date().toLocaleTimeString(lang==='ar'?'ar-SA':'en-US',{hour:'2-digit',minute:'2-digit'})});
+  if(history.length>10) history.pop();
+
+  const icons={med:'fa-pills',food:'fa-apple-alt',supplement:'fa-capsules',personal:'fa-spa'};
+  const colors={med:{bg:'#eff6ff',c:'#3b82f6'},food:{bg:'#fef3c7',c:'#d97706'},supplement:{bg:'#f0fdf4',c:'#16a34a'},personal:{bg:'#fdf4ff',c:'#a855f7'}};
+  const col=colors[p.type]||{bg:'#f1f5f9',c:'#64748b'};
+  const sCfg={
+    safe:{icon:'fa-check-circle',label:t('safeLabel'),desc:t('safeDesc')},
+    warning:{icon:'fa-exclamation-triangle',label:t('warningLabel'),desc:t('warningDesc')},
+    danger:{icon:'fa-times-circle',label:t('dangerLabel'),desc:t('dangerDesc')},
+  };
+  const cfg=sCfg[s];
+  const tp=t('t'+p.type.charAt(0).toUpperCase()+p.type.slice(1));
+  const flags=[
+    {k:'sugar',lbl:t('flSugar'),has:p.sugar},
+    {k:'caffeine',lbl:t('flCaffeine'),has:p.caffeine},
+    {k:'sodium',lbl:t('flSodium'),has:p.salt||p.sodium},
+    {k:'lactose',lbl:t('flLactose'),has:p.lactose},
+    {k:'penicillin',lbl:t('flPenicillin'),has:p.penicillin},
+    {k:'gluten',lbl:t('flGluten'),has:p.gluten},
+  ];
+  const flagsHtml=flags.map(f=>{
+    const harmful=profile&&profile.allergies.includes(f.k)&&f.has;
+    const cls=harmful?'has':f.has?'has-warn':'';
+    return `<div class="flag-item ${cls}"><div class="flag-dot"></div><span>${f.lbl}</span></div>`;
+  }).join('');
+
+  document.getElementById('resultContent').innerHTML=`
+    <div class="res-product-card">
+      <div class="res-product-row">
+        <div class="res-icon" style="background:${col.bg}"><i class="fas ${icons[p.type]||'fa-box'}" style="color:${col.c}"></i></div>
+        <div style="min-width:0">
+          <div class="res-name">${nm}</div>
+          <div class="res-type">${tp}</div>
+        </div>
+      </div>
+      <div class="safety-banner ${s}">
+        <i class="fas ${cfg.icon}"></i>
+        <div class="sb-text"><strong>${cfg.label}</strong><span>${cfg.desc}</span></div>
+      </div>
+      ${alerts.length?`<div class="alert-list">${alerts.map(a=>`<div class="alert-item ${a.type}"><i class="fas fa-bell"></i><p>${a.msg}</p></div>`).join('')}</div>`:''}
+      <div class="info-block">
+        <h4>${t('descLbl')}</h4>
+        <p>${lang==='ar'?p.dar:p.den}</p>
+      </div>
+      <div class="info-block">
+        <h4>${t('ingLbl')}</h4>
+        <div class="tag-list">${p.ing.map(i=>`<span class="tag">${i}</span>`).join('')}</div>
+      </div>
+      <div class="info-block">
+        <h4>${t('flagsLbl')}</h4>
+        <div class="flags-grid">${flagsHtml}</div>
+      </div>
+    </div>`;
+  goTo('screen-results');
+  updateNavLinks('screen-results');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============================================================
+   PROFILE RENDER
+============================================================ */
 function renderProfile(){
-    if(!userProfile){ showScreen('screen-identity'); return; }
-    const bmi = (userProfile.weight && userProfile.height)
-        ? (userProfile.weight / ((userProfile.height/100)**2)).toFixed(1)
-        : null;
-    let bmiLabel = '';
-    if(bmi){ if(bmi<18.5) bmiLabel=t('bmiUnder'); else if(bmi<25) bmiLabel=t('bmiNormal'); else if(bmi<30) bmiLabel=t('bmiOver'); else bmiLabel=t('bmiObese'); }
+  if(!profile){goTo('screen-identity');return;}
+  const bmi=(profile.weight&&profile.height)?(profile.weight/((profile.height/100)**2)).toFixed(1):null;
+  let bmiLbl='';
+  if(bmi){if(bmi<18.5)bmiLbl=t('bmiUnder');else if(bmi<25)bmiLbl=t('bmiNormal');else if(bmi<30)bmiLbl=t('bmiOver');else bmiLbl=t('bmiObese');}
+  const alLbls=profile.allergies.length>0
+    ?profile.allergies.map(a=>t('a'+a.charAt(0).toUpperCase()+a.slice(1))).join('، ')
+    :t('noAllergy');
+  const gLbl=profile.gender==='male'?t('genderMale'):t('genderFemale');
 
-    const allergyLabels = userProfile.allergies.length>0
-        ? userProfile.allergies.map(a=>T[currentLang]['a'+a.charAt(0).toUpperCase()+a.slice(1)]||a).join('، ')
-        : (currentLang==='ar'?'لا توجد حساسية':'No allergies');
+  const histHtml=history.length>0
+    ?history.map(h=>`<div class="history-item"><div class="h-dot ${h.safety}"></div><div class="h-name">${h.name}</div><div class="h-time">${h.time}</div></div>`).join('')
+    :`<div class="empty-state" style="padding:24px"><i class="fas fa-history"></i><p>${t('noHistory')}</p></div>`;
 
-    const historyHtml = scanHistory.length > 0
-        ? scanHistory.map(h=>`<div class="history-item">
-                <div class="history-safety safety-${h.safety}"></div>
-                <div class="history-name">${h.name}</div>
-                <div class="history-time">${h.time}</div>
-            </div>`).join('')
-        : `<div class="empty-state" style="padding:24px"><i class="fas fa-history"></i><p>${t('noHistory')}</p></div>`;
-
-    document.getElementById('profileContent').innerHTML = `
-        <div class="profile-card">
-            <div class="profile-avatar"><i class="fas fa-user"></i></div>
-            <div class="profile-name">${userProfile.name}</div>
-            <div class="profile-meta">${userProfile.age} ${t('years')} • ${userProfile.blood} • ${t('gender'+userProfile.gender.charAt(0).toUpperCase()+userProfile.gender.slice(1))}</div>
-            <div class="profile-tags">
-                <span class="profile-tag"><i class="fas fa-tint"></i> ${userProfile.blood}</span>
-                ${userProfile.allergies.map(a=>`<span class="profile-tag"><i class="fas fa-exclamation-triangle"></i> ${T[currentLang]['a'+a.charAt(0).toUpperCase()+a.slice(1)]||a}</span>`).join('')}
-            </div>
-        </div>
-
-        <div class="profile-info-grid">
-            <div class="profile-info-item">
-                <i class="fas fa-birthday-cake"></i>
-                <strong>${userProfile.age}</strong>
-                <span>${t('years')}</span>
-            </div>
-            <div class="profile-info-item">
-                <i class="fas fa-tint"></i>
-                <strong>${userProfile.blood}</strong>
-                <span>${currentLang==='ar'?'فصيلة الدم':'Blood Type'}</span>
-            </div>
-            ${userProfile.weight?`<div class="profile-info-item"><i class="fas fa-weight"></i><strong>${userProfile.weight}</strong><span>${t('kg')}</span></div>`:''}
-            ${userProfile.height?`<div class="profile-info-item"><i class="fas fa-ruler-vertical"></i><strong>${userProfile.height}</strong><span>${t('cm')}</span></div>`:''}
-            ${bmi?`<div class="profile-info-item"><i class="fas fa-calculator"></i><strong>${bmi}</strong><span>${t('bmi')} • ${bmiLabel}</span></div>`:''}
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-header-icon"><i class="fas fa-allergies"></i></div>
-                <div><h3>${currentLang==='ar'?'الحساسيات والحالات الصحية':'Allergies & Health Conditions'}</h3></div>
-            </div>
-            <p style="font-size:14px;color:var(--dark2);line-height:1.7">${allergyLabels}</p>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-header-icon"><i class="fas fa-history"></i></div>
-                <div><h3>${t('scanHistoryTitle')}</h3></div>
-            </div>
-            <div class="history-list">${historyHtml}</div>
-        </div>
-
-        <button class="btn-secondary" onclick="showScreen('screen-identity')">
-            <i class="fas fa-edit"></i> ${t('editProfile')}
-        </button>`;
+  document.getElementById('profileContent').innerHTML=`
+    <div class="profile-banner">
+      <div class="pb-avatar"><i class="fas fa-user"></i></div>
+      <div class="pb-name">${profile.name}</div>
+      <div class="pb-meta">${profile.age} ${t('years')} • ${profile.blood} • ${gLbl}</div>
+      <div class="pb-tags">
+        <span class="pb-tag"><i class="fas fa-tint"></i> ${profile.blood}</span>
+        ${profile.allergies.map(a=>`<span class="pb-tag"><i class="fas fa-exclamation-triangle"></i> ${t('a'+a.charAt(0).toUpperCase()+a.slice(1))}</span>`).join('')}
+      </div>
+    </div>
+    <div class="info-grid">
+      <div class="info-tile"><i class="fas fa-birthday-cake"></i><strong>${profile.age}</strong><span>${t('years')}</span></div>
+      <div class="info-tile"><i class="fas fa-tint"></i><strong>${profile.blood}</strong><span>${lang==='ar'?'فصيلة الدم':'Blood Type'}</span></div>
+      ${profile.weight?`<div class="info-tile"><i class="fas fa-weight"></i><strong>${profile.weight}</strong><span>${t('kg')}</span></div>`:''}
+      ${profile.height?`<div class="info-tile"><i class="fas fa-ruler-vertical"></i><strong>${profile.height}</strong><span>${t('cm')}</span></div>`:''}
+      ${bmi?`<div class="info-tile"><i class="fas fa-calculator"></i><strong>${bmi}</strong><span>${t('bmi')} • ${bmiLbl}</span></div>`:''}
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon"><i class="fas fa-allergies"></i></div>
+        <div><h3>${t('allergiesTitle')}</h3></div>
+      </div>
+      <p style="font-size:13px;color:var(--dark3);line-height:1.75">${alLbls}</p>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-head-icon"><i class="fas fa-history"></i></div>
+        <div><h3>${t('scanHistoryTitle')}</h3></div>
+      </div>
+      <div class="history-list">${histHtml}</div>
+    </div>
+    <button class="btn-secondary" onclick="goTo('screen-identity')">
+      <i class="fas fa-edit"></i>${t('editProfile')}
+    </button>`;
 }
 
-// ============================================================
-// INIT
-// ============================================================
-window.addEventListener('DOMContentLoaded', ()=>{
-    applyTranslations();
-    document.getElementById('screen-welcome').classList.add('active');
+/* ============================================================
+   INIT
+============================================================ */
+window.addEventListener('DOMContentLoaded',()=>{
+  applyLang();
+  updateNavLinks('screen-welcome');
+  // Handle safe area on iOS
+  document.addEventListener('touchmove',e=>{
+    if(e.target.closest('.drawer')) e.stopPropagation();
+  },{passive:true});
 });
-    </script>
+
+// Close drawer on resize to desktop
+window.addEventListener('resize',()=>{
+  if(window.innerWidth>=768) closeDrawer();
+});
+</script>
 </body>
 </html>
-  
